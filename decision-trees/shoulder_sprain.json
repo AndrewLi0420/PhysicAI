@@ -1,0 +1,146 @@
+{
+  "injury_type": "shoulder_sprain",
+  "display_name": "Shoulder Sprain / Impingement",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "mechanism",
+  "_clinical_notes": "Key differentials: (1) AC joint sprain — direct blow to shoulder point, step deformity = Grade III+ seek care. (2) Rotator cuff tear — sudden pop with arm raise, weakness > pain, inability to raise arm = seek care. (3) Shoulder dislocation — arm held externally rotated/abducted, obvious deformity = emergency seek care. (4) Impingement — gradual overhead pain, painful arc 60-120°, no acute trauma = conservative. (5) FOOSH — clavicle bony tenderness = possible fracture. Grades: I = micro-tear/sprain, conservative. II = partial tear, conservative + monitor. III = complete disruption, often needs eval.",
+  "nodes": {
+    "mechanism": {
+      "prompt": "How did the shoulder get injured?",
+      "options": [
+        { "label": "Direct blow or fall on the shoulder point", "next_node_id": "deformity_check", "set_flags": { "mechanism": "direct_blow" } },
+        { "label": "Fell on an outstretched hand (FOOSH)", "next_node_id": "clavicle_check", "set_flags": { "mechanism": "foosh" } },
+        { "label": "Arm was pulled or yanked", "next_node_id": "dislocation_check", "set_flags": { "mechanism": "pull" } },
+        { "label": "Gradual pain from overhead activity / throwing", "next_node_id": "overhead_pain", "set_flags": { "mechanism": "overuse" } }
+      ]
+    },
+
+    "deformity_check": {
+      "prompt": "Compare both shoulders. Is there a visible bump or step-off deformity at the top of the injured shoulder?",
+      "options": [
+        { "label": "Yes, visible step or bump at the shoulder tip", "next_node_id": "seek_acj3", "set_flags": { "deformity": true, "ligament": "AC" } },
+        { "label": "No visible deformity — just pain", "next_node_id": "arm_raise", "set_flags": { "deformity": false, "ligament": "AC" } }
+      ]
+    },
+
+    "clavicle_check": {
+      "prompt": "Press along the collarbone from your neck to your shoulder. Is there sharp point tenderness anywhere along the bone?",
+      "options": [
+        { "label": "Yes, one specific spot is very tender", "next_node_id": "seek_clavicle", "set_flags": { "clavicle_tenderness": true } },
+        { "label": "General soreness but no specific spot", "next_node_id": "arm_raise", "set_flags": { "clavicle_tenderness": false } }
+      ]
+    },
+
+    "dislocation_check": {
+      "prompt": "Does the shoulder look like it's out of place, or is the arm held in an unusual position away from the body?",
+      "options": [
+        { "label": "Yes, looks clearly out of position", "next_node_id": "seek_dislocation", "set_flags": { "dislocation_flag": true } },
+        { "label": "No, position looks normal", "next_node_id": "arm_raise", "set_flags": { "dislocation_flag": false } }
+      ]
+    },
+
+    "overhead_pain": {
+      "prompt": "When did pain start?",
+      "options": [
+        { "label": "Gradual over days or weeks", "next_node_id": "arc_pain", "set_flags": { "onset": "gradual" } },
+        { "label": "Sudden — something snapped or gave out during activity", "next_node_id": "pop_shoulder", "set_flags": { "onset": "acute" } }
+      ]
+    },
+
+    "pop_shoulder": {
+      "prompt": "Did you feel a pop, and can you still raise your arm overhead?",
+      "options": [
+        { "label": "Pop + can still raise arm (painful)", "next_node_id": "arm_raise", "set_flags": { "pop": true } },
+        { "label": "Pop + cannot raise arm / extreme weakness", "next_node_id": "seek_cuff", "set_flags": { "pop": true, "cuff_flag": true } }
+      ]
+    },
+
+    "arc_pain": {
+      "prompt": "Where in the range of motion is the pain worst?",
+      "options": [
+        { "label": "When raising arm between shoulder height and overhead", "next_node_id": "arm_raise", "set_flags": { "pattern": "impingement_arc" } },
+        { "label": "At the end range only (fully overhead)", "next_node_id": "arm_raise", "set_flags": { "pattern": "end_range" } },
+        { "label": "Throughout all movement", "next_node_id": "arm_raise", "set_flags": { "pattern": "throughout" } }
+      ]
+    },
+
+    "arm_raise": {
+      "prompt": "Can you raise the injured arm out to the side and overhead?",
+      "options": [
+        { "label": "Yes, full range with some pain", "next_node_id": "grade_shoulder", "set_flags": { "rom": "full" } },
+        { "label": "Limited — can't get past shoulder height", "next_node_id": "grade2_shoulder", "set_flags": { "rom": "limited" } },
+        { "label": "Cannot raise arm at all / severe weakness", "next_node_id": "seek_cuff", "set_flags": { "rom": "none" } }
+      ]
+    },
+
+    "grade_shoulder": {
+      "prompt": "How would you describe the pain level?",
+      "options": [
+        { "label": "Mild — noticeable but not limiting daily activity", "next_node_id": "grade1", "set_flags": { "severity": "mild" } },
+        { "label": "Moderate — limiting overhead activities", "next_node_id": "grade2_shoulder", "set_flags": { "severity": "moderate" } }
+      ]
+    },
+
+    "seek_acj3": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "A visible step deformity at the shoulder tip indicates a significant AC joint separation (Grade III or higher). This needs imaging and evaluation.",
+        "grade": "III",
+        "injury_subtype": "AC Joint Separation - Grade III"
+      }
+    },
+
+    "seek_clavicle": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Point tenderness along the collarbone after a fall may indicate a clavicle fracture. You should get an X-ray.",
+        "grade": null,
+        "injury_subtype": "Possible Clavicle Fracture"
+      }
+    },
+
+    "seek_dislocation": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "A shoulder dislocation needs to be reduced (put back in place) by a medical professional. Do not attempt to put it back yourself.",
+        "grade": null,
+        "injury_subtype": "Suspected Shoulder Dislocation"
+      }
+    },
+
+    "seek_cuff": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Inability to raise the arm or sudden complete weakness after a pop may indicate a rotator cuff tear. You need an evaluation and possibly an MRI.",
+        "grade": null,
+        "injury_subtype": "Suspected Rotator Cuff Tear"
+      }
+    },
+
+    "grade1": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Shoulder Sprain / Impingement - Grade I",
+        "timeline_days": [7, 21]
+      }
+    },
+
+    "grade2_shoulder": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Shoulder Sprain / Impingement - Grade II",
+        "timeline_days": [21, 56],
+        "monitor_note": "If no improvement in 7 days or weakness develops, seek evaluation."
+      }
+    }
+  }
+}

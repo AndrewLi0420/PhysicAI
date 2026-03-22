@@ -1,0 +1,93 @@
+{
+  "injury_type": "groin_strain",
+  "display_name": "Groin Strain",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "mechanism",
+  "_clinical_notes": "Groin strain typically involves adductor muscles (most common) or hip flexors (iliopsoas). Grade I-II adductor strains are the majority. Red flags: sharp hip crease pain with clicking/locking = hip labral tear, refer. Groin pain in adolescent males = rule out slipped capital femoral epiphysis (SCFE) — severe pain, limp, hip external rotation — seek care. Grade I: mild, full WB. Grade II: moderate, limp. Grade III: complete rupture, severe pain, palpable defect, cannot bear weight.",
+  "nodes": {
+    "mechanism": {
+      "prompt": "How did the groin injury happen?",
+      "options": [
+        { "label": "Kicking, side-stepping, or change of direction", "next_node_id": "location", "set_flags": { "mechanism": "kick_cod" } },
+        { "label": "Sudden overstretching / split-like movement", "next_node_id": "location", "set_flags": { "mechanism": "stretch" } },
+        { "label": "Gradual / overuse over time", "next_node_id": "location", "set_flags": { "mechanism": "overuse" } },
+        { "label": "Direct blow to the groin area", "next_node_id": "location", "set_flags": { "mechanism": "impact" } }
+      ]
+    },
+
+    "location": {
+      "prompt": "Where is most of the pain?",
+      "options": [
+        { "label": "Inner thigh (adductor area)", "next_node_id": "click_check", "set_flags": { "sublocation": "adductor" } },
+        { "label": "Hip crease / front of hip", "next_node_id": "click_check", "set_flags": { "sublocation": "hip_flexor" } },
+        { "label": "Deep in the hip joint", "next_node_id": "click_check", "set_flags": { "sublocation": "deep_hip" } }
+      ]
+    },
+
+    "click_check": {
+      "prompt": "Do you notice any clicking, catching, or locking sensation in your hip?",
+      "options": [
+        { "label": "Yes, clicking or catching in the hip", "next_node_id": "seek_labral", "set_flags": { "click_flag": true } },
+        { "label": "No clicking — just pain", "next_node_id": "pop_groin", "set_flags": { "click_flag": false } }
+      ]
+    },
+
+    "pop_groin": {
+      "prompt": "Did you feel a pop or tearing sensation at the moment of injury?",
+      "options": [
+        { "label": "Yes, a clear pop or tear", "next_node_id": "function_groin", "set_flags": { "pop": true } },
+        { "label": "No", "next_node_id": "function_groin", "set_flags": { "pop": false } }
+      ]
+    },
+
+    "function_groin": {
+      "prompt": "How is your walking ability right now?",
+      "options": [
+        { "label": "Walking normally with mild discomfort", "next_node_id": "grade1", "set_flags": { "function": "good" } },
+        { "label": "Limping but can walk", "next_node_id": "grade2", "set_flags": { "function": "limited" } },
+        { "label": "Very painful to walk / cannot bear weight", "next_node_id": "seek_grade3", "set_flags": { "function": "poor" } }
+      ]
+    },
+
+    "seek_labral": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Clicking or catching in the hip joint can indicate a hip labral tear, which needs a proper evaluation and imaging to diagnose.",
+        "grade": null,
+        "injury_subtype": "Possible Hip Labral Tear"
+      }
+    },
+
+    "seek_grade3": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Severe groin pain with inability to bear weight may indicate a significant muscle rupture or hip injury. You should be evaluated.",
+        "grade": "III",
+        "injury_subtype": "Severe Groin / Adductor Strain - Grade III"
+      }
+    },
+
+    "grade1": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Groin / Adductor Strain - Grade I",
+        "timeline_days": [7, 21]
+      }
+    },
+
+    "grade2": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Groin / Adductor Strain - Grade II",
+        "timeline_days": [21, 56]
+      }
+    }
+  }
+}

@@ -181,6 +181,41 @@ Issues that persisted through 3 rounds of adversarial review — resolve before 
 
 ---
 
+## GSTACK REVIEW REPORT
+
+| Review | Trigger | Why | Runs | Status | Findings |
+|--------|---------|-----|------|--------|----------|
+| CEO Review | `/plan-ceo-review` | Scope & strategy | 0 | — | — |
+| Codex Review | `/codex review` | Independent 2nd opinion | 0 | — | — |
+| Eng Review | `/plan-eng-review` | Architecture & tests (required) | 1 | CLEAR | 10 issues, 0 critical gaps |
+| Design Review | `/plan-design-review` | UI/UX gaps | 0 | — | — |
+
+**VERDICT:** ENG CLEARED — ready to implement.
+
+**Resolved decisions (10):**
+1. Decision tree representation → JSON config (PT-auditable, data-driven)
+2. Claude API placement → Supabase Edge Function (API key server-side)
+3. Guest session model → UUID token in URL, stored in Supabase
+4. Notification scheduling → Global hourly pg_cron query
+5. Exercise library storage → Static `exercises.json` bundled with app
+6. Exercise ID validation → Claude tool use + server-side ID check, retry on failure
+7. PT review queue → Founder manually reviews first 10 via Supabase dashboard
+8. Decision tree test coverage → Full branch coverage, CI-enforced
+9. Check-in logic tests → Parametrized boundary tests at pain=3/4 and 6/7
+10. Claude latency UX → Loading screen with micro-copy (no streaming)
+
+**Critical gaps resolved (3):**
+- Claude API timeout → try/catch + `generation_failed` status + background retry + email delivery
+- Guest migration atomicity → Supabase RPC transaction (update user_id + invalidate token)
+- Resend failure logging → `notification_failures` table + single retry per cron run
+
+**Build now (pre-implementation):**
+- Full JSON decision tree spec for all 9 injury types (before any code)
+- `exercises.json` stub (ankle, ~10-15 exercises) to unblock dev; full 60-80 before launch
+- `DATA_POLICY.md` written ✓
+
+---
+
 ## What I noticed about how you think
 
 - You said "all of the above" twice when pushed to pick one target user — then, when I reframed it as "where can you find your first 10 users THIS WEEK," you answered immediately and specifically. You know your answer. You just needed the constraint to surface it.

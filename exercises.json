@@ -1,0 +1,289 @@
+{
+  "_meta": {
+    "version": "stub-0.1",
+    "pt_reviewed": false,
+    "total_exercises": 27,
+    "note": "Stub library — 3 exercises per injury category, one per phase. Expand to 60-80 exercises before launch with PT review."
+  },
+  "exercises": [
+
+    {
+      "exercise_id": "ankle-elevation-ice",
+      "name": "Ankle Elevation + Ice",
+      "description": "Lie down and prop your ankle above heart level on 2-3 pillows. Apply an ice pack wrapped in a cloth to the ankle for 15-20 minutes. Rest and avoid putting weight on it.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": 1200,
+      "phase": "1_pain_control",
+      "injury_types": ["ankle_sprain"]
+    },
+    {
+      "exercise_id": "ankle-alphabet",
+      "name": "Ankle Alphabet",
+      "description": "Sit in a chair with your foot off the ground. Use your foot and ankle to trace each letter of the alphabet in the air, moving only from the ankle — not the knee or hip. Move slowly and through full range.",
+      "sets": 2,
+      "reps": null,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["ankle_sprain"]
+    },
+    {
+      "exercise_id": "ankle-single-leg-balance",
+      "name": "Single-Leg Balance",
+      "description": "Stand on the injured leg with a slight bend in the knee. Hold for 30 seconds without touching down. Progress: close your eyes, then stand on a folded towel. Have a wall nearby for safety.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 30,
+      "phase": "3_return_to_sport",
+      "injury_types": ["ankle_sprain"]
+    },
+
+    {
+      "exercise_id": "knee-quad-set",
+      "name": "Quad Set (Isometric)",
+      "description": "Lie on your back with the injured leg straight. Roll a small towel under your knee. Tighten the thigh muscle and push the back of your knee gently down toward the floor. Hold 5 seconds, release. Squeeze the quad — you should feel the muscle above the kneecap firm up.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "1_pain_control",
+      "injury_types": ["knee_sprain"]
+    },
+    {
+      "exercise_id": "knee-straight-leg-raise",
+      "name": "Straight Leg Raise",
+      "description": "Lie on your back. Bend the uninjured knee so that foot is flat. Keep the injured leg straight and tighten the quad. Raise the straight leg to the height of the bent knee, hold 2 seconds, lower slowly. Do not let the lower back arch.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["knee_sprain"]
+    },
+    {
+      "exercise_id": "knee-mini-squat",
+      "name": "Mini Squat",
+      "description": "Stand with feet shoulder-width apart, hands on hips or lightly touching a wall for balance. Bend both knees to about 30-40 degrees — like sitting back slightly. Hold 2 seconds, stand back up. Keep chest up and knees tracking over toes.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["knee_sprain"]
+    },
+
+    {
+      "exercise_id": "hamstring-prone-ice",
+      "name": "Prone Rest + Ice",
+      "description": "Lie face down (prone) with the injured leg straight. Apply an ice pack to the back of the thigh for 15-20 minutes. The prone position gently lengthens the hamstring without stress. Avoid sitting for long periods — it compresses the proximal hamstring.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": 1200,
+      "phase": "1_pain_control",
+      "injury_types": ["hamstring_strain"]
+    },
+    {
+      "exercise_id": "hamstring-prone-curl",
+      "name": "Prone Hamstring Curl (Bodyweight)",
+      "description": "Lie face down. Slowly curl the injured leg — bring your heel toward your buttock — until you feel resistance or mild discomfort (not sharp pain). Lower slowly over 3 seconds. Keep hips pressed to the floor.",
+      "sets": 3,
+      "reps": 12,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["hamstring_strain"]
+    },
+    {
+      "exercise_id": "hamstring-nordic-eccentric",
+      "name": "Nordic Hamstring Curl (Eccentric)",
+      "description": "Kneel on a soft surface with feet secured under a couch or partner. Arms crossed on chest. Slowly lower your body forward by extending at the knees — resist the fall with your hamstrings. Use your hands to catch yourself at the bottom, then use your arms to push back to the start. This is an advanced eccentric exercise — only perform if pain-free during the previous phase.",
+      "sets": 3,
+      "reps": 6,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["hamstring_strain"]
+    },
+
+    {
+      "exercise_id": "groin-adductor-isometric-squeeze",
+      "name": "Adductor Isometric Squeeze",
+      "description": "Lie on your back with knees bent and feet flat. Place a folded pillow or rolled towel between your knees. Squeeze your knees together against the pillow, hold 5 seconds, release. This activates the adductors without movement.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "1_pain_control",
+      "injury_types": ["groin_strain"]
+    },
+    {
+      "exercise_id": "groin-side-lying-adduction",
+      "name": "Side-Lying Hip Adduction",
+      "description": "Lie on the injured side with the bottom leg straight. Bend the top leg and rest it in front of you. Slowly raise the bottom (injured) leg 12-18 inches off the floor, hold 2 seconds, lower slowly. Keep toes pointing forward.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["groin_strain"]
+    },
+    {
+      "exercise_id": "groin-lateral-lunge",
+      "name": "Lateral Lunge",
+      "description": "Stand with feet together. Step one foot out to the side, bend that knee while keeping the other leg straight, and sit back into the lunge. Push off back to start. Keep the lunging knee tracking over the toes. Only perform if pain-free with single-leg squats.",
+      "sets": 3,
+      "reps": 10,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["groin_strain"]
+    },
+
+    {
+      "exercise_id": "shoulder-pendulum",
+      "name": "Codman Pendulum",
+      "description": "Stand and lean forward, supporting yourself with the uninjured arm on a table or chair. Let the injured arm hang loosely. Use gentle body motion (not your arm muscles) to create small circles — first clockwise, then counter-clockwise. Keep the arm relaxed and passive. This uses gravity to decompress the joint.",
+      "sets": 2,
+      "reps": null,
+      "duration_sec": 60,
+      "phase": "1_pain_control",
+      "injury_types": ["shoulder_sprain"]
+    },
+    {
+      "exercise_id": "shoulder-external-rotation-band",
+      "name": "Shoulder External Rotation (Band)",
+      "description": "Stand with a light resistance band anchored at elbow height. Hold the band with the injured arm, elbow bent at 90 degrees and tucked to your side. Rotate your forearm outward (away from body) against band resistance. Control the return. Keep the elbow glued to your side throughout.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["shoulder_sprain"]
+    },
+    {
+      "exercise_id": "shoulder-overhead-press",
+      "name": "Overhead Press Progression",
+      "description": "Stand holding a light weight (or no weight to start) with elbow at shoulder height. Press overhead until arm is fully extended, then lower slowly. Start with a very light weight — the goal is full overhead range without compensation. Progress weight only when pain-free.",
+      "sets": 3,
+      "reps": 12,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["shoulder_sprain"]
+    },
+
+    {
+      "exercise_id": "back-knee-to-chest",
+      "name": "Gentle Knee-to-Chest Stretch",
+      "description": "Lie on your back with both knees bent. Slowly bring one knee up toward your chest, holding behind the thigh. Hold 20-30 seconds, breathing deeply. Lower and repeat on both sides. Do not force range. This should feel like gentle decompression, not pain.",
+      "sets": 2,
+      "reps": null,
+      "duration_sec": 30,
+      "phase": "1_pain_control",
+      "injury_types": ["lower_back_strain"]
+    },
+    {
+      "exercise_id": "back-bird-dog",
+      "name": "Bird Dog",
+      "description": "Start on hands and knees with a flat back. Simultaneously extend your right arm forward and left leg back until both are level with the spine. Hold 3 seconds. Lower and switch sides. Keep hips level — avoid rotating. This trains spinal stability without loading the back.",
+      "sets": 3,
+      "reps": 10,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["lower_back_strain"]
+    },
+    {
+      "exercise_id": "back-dead-bug",
+      "name": "Dead Bug",
+      "description": "Lie on your back with arms pointing toward the ceiling and knees bent at 90 degrees (tabletop position). Slowly lower your right arm overhead and left leg toward the floor simultaneously — keep low back pressed to the floor throughout. Return and switch sides. If the back arches, reduce the range.",
+      "sets": 3,
+      "reps": 10,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["lower_back_strain"]
+    },
+
+    {
+      "exercise_id": "shin-rest-activity-mod",
+      "name": "Activity Modification + Ice",
+      "description": "Reduce or eliminate running until pain occurs only after activity (not during). Apply ice to the shin for 15 minutes after any activity. Avoid the specific training load that caused symptoms — cross-train with swimming or cycling if needed.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": 900,
+      "phase": "1_pain_control",
+      "injury_types": ["shin_splints"]
+    },
+    {
+      "exercise_id": "shin-calf-raise",
+      "name": "Calf Raise",
+      "description": "Stand with feet hip-width apart on a flat surface (progress to a step edge). Rise onto your toes slowly over 2 seconds, hold at the top for 1 second, then lower slowly over 3 seconds. Keep movements controlled. When pain-free on flat ground, progress to single-leg on a step with a slow eccentric lower.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["shin_splints"]
+    },
+    {
+      "exercise_id": "shin-run-walk-progression",
+      "name": "Run-Walk Progression",
+      "description": "Begin with a 1:1 ratio: walk 1 minute, jog 1 minute, repeat for 20 minutes. Pain must remain at 0-2/10 throughout and return to 0 within 24 hours. Progress by increasing jog interval by 1 minute every 3 sessions if pain-free. Stop immediately if pain exceeds 3/10.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": 1200,
+      "phase": "3_return_to_sport",
+      "injury_types": ["shin_splints"]
+    },
+
+    {
+      "exercise_id": "wrist-buddy-rest",
+      "name": "Wrist Rest + Gentle ROM",
+      "description": "Avoid painful activities. Apply ice 15 minutes on / 15 minutes off for the first 48 hours. Gently move the wrist through pain-free range only — small circles, gentle up-and-down movement. Do not push into pain. Consider a wrist brace for daily activities during this phase.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": 600,
+      "phase": "1_pain_control",
+      "injury_types": ["wrist_sprain"]
+    },
+    {
+      "exercise_id": "wrist-flexion-extension",
+      "name": "Wrist Flexion and Extension",
+      "description": "Rest your forearm on a table with hand hanging off the edge, palm down. Use the other hand lightly for guidance. Bend the wrist up (extension) and down (flexion) through the full comfortable range. Then flip palm up and repeat. Slow and controlled — 3 seconds each direction.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["wrist_sprain"]
+    },
+    {
+      "exercise_id": "wrist-grip-strengthening",
+      "name": "Grip Strengthening",
+      "description": "Squeeze a soft stress ball or rolled-up sock in your hand. Hold the squeeze for 5 seconds, then fully release and spread fingers wide. Progress to a firmer ball as grip strength returns. Build up to sport-specific grip demands (racket, bat, ball) in the final days of this phase.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["wrist_sprain"]
+    },
+
+    {
+      "exercise_id": "finger-buddy-taping",
+      "name": "Buddy Taping",
+      "description": "Tape the injured finger to the adjacent healthy finger with medical tape, leaving the joints free to bend. Place a small piece of gauze or foam between fingers to prevent skin irritation. Rewrap daily. Buddy taping provides support and allows protected motion — wear during all activities for this phase.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": null,
+      "phase": "1_pain_control",
+      "injury_types": ["finger_sprain"]
+    },
+    {
+      "exercise_id": "finger-tendon-glides",
+      "name": "Tendon Glide Exercises",
+      "description": "Perform this sequence with the injured finger, 10 reps each position: (1) Start straight. (2) Bend at the big knuckle only — tabletop position. (3) Curl all joints into a hook. (4) Make a full fist. Hold each position 3 seconds. Move slowly and stop if sharp pain occurs. This maintains tendon gliding and prevents stiffness.",
+      "sets": 3,
+      "reps": 10,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["finger_sprain"]
+    },
+    {
+      "exercise_id": "finger-pinch-grip",
+      "name": "Pinch and Grip Strengthening",
+      "description": "Pinch a small folded piece of foam or a clothespin between thumb and each finger in sequence for 5 seconds each. Then make a full fist around a soft ball and hold 5 seconds. Progress to stronger resistance. Perform pain-free before returning to sport-specific ball handling.",
+      "sets": 3,
+      "reps": 12,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["finger_sprain"]
+    }
+  ]
+}

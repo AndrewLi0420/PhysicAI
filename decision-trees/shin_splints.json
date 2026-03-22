@@ -1,0 +1,100 @@
+{
+  "injury_type": "shin_splints",
+  "display_name": "Shin Splints",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "pain_character",
+  "_clinical_notes": "Shin splints (MTSS) = diffuse medial tibial pain that warms up with activity. Key differential: stress fracture = pinpoint tenderness at one spot, pain with hop test, does NOT warm up with activity. Compartment syndrome (acute or chronic exertional): tightness/pressure that builds rapidly with exercise, doesn't resolve with rest, possible foot numbness = seek care. Grades for MTSS: mild (pain after activity only), moderate (pain during + after), severe (pain at rest or with walking).",
+  "nodes": {
+    "pain_character": {
+      "prompt": "How would you describe the shin pain?",
+      "options": [
+        { "label": "Dull ache along a wide area of the shin — comes on during or after running", "next_node_id": "onset_timing", "set_flags": { "character": "diffuse_ache" } },
+        { "label": "Sharp or throbbing pain at one specific spot on the shin", "next_node_id": "hop_test", "set_flags": { "character": "point_tenderness" } },
+        { "label": "Intense tightness or pressure that builds up during exercise", "next_node_id": "compartment_check", "set_flags": { "character": "pressure" } }
+      ]
+    },
+
+    "onset_timing": {
+      "prompt": "When does the pain occur during activity?",
+      "options": [
+        { "label": "Only after I stop — fine while running", "next_node_id": "grade1_shin", "set_flags": { "onset": "post_activity" } },
+        { "label": "Starts mid-run but I can push through", "next_node_id": "warmup_check", "set_flags": { "onset": "during_activity" } },
+        { "label": "Hurts from the start of running / even walking", "next_node_id": "grade_severe", "set_flags": { "onset": "from_start" } }
+      ]
+    },
+
+    "warmup_check": {
+      "prompt": "Does the pain ease up after you've been running for a few minutes (warm-up effect)?",
+      "options": [
+        { "label": "Yes, it warms up and gets better mid-run", "next_node_id": "grade2_shin", "set_flags": { "warmup": true } },
+        { "label": "No, it stays the same or gets worse", "next_node_id": "hop_test", "set_flags": { "warmup": false } }
+      ]
+    },
+
+    "hop_test": {
+      "prompt": "Try a single-leg hop on the injured leg. Does it cause sharp pain in the shin?",
+      "options": [
+        { "label": "Yes, sharp pain when hopping", "next_node_id": "seek_stress_fracture", "set_flags": { "hop_test_pos": true } },
+        { "label": "No sharp pain — just general soreness", "next_node_id": "grade2_shin", "set_flags": { "hop_test_pos": false } },
+        { "label": "Too painful to attempt", "next_node_id": "seek_stress_fracture", "set_flags": { "hop_test_pos": true } }
+      ]
+    },
+
+    "compartment_check": {
+      "prompt": "After you stop exercising, does the tightness/pressure go away within about 15-30 minutes?",
+      "options": [
+        { "label": "Yes, resolves fairly quickly with rest", "next_node_id": "grade2_shin", "set_flags": { "compartment": "exertional" } },
+        { "label": "No — persists for hours or I have foot numbness / tingling", "next_node_id": "seek_compartment", "set_flags": { "compartment": "acute_flag" } }
+      ]
+    },
+
+    "grade_severe": {
+      "prompt": "Does it hurt when you're just walking around or standing?",
+      "options": [
+        { "label": "Yes, even walking or standing is painful", "next_node_id": "hop_test", "set_flags": { "severity": "severe" } },
+        { "label": "Mostly with running, walking is okay", "next_node_id": "grade2_shin", "set_flags": { "severity": "moderate_high" } }
+      ]
+    },
+
+    "seek_stress_fracture": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Point tenderness at one spot on the shin combined with pain on hopping suggests a possible stress fracture. This needs imaging (X-ray + possible MRI/bone scan) to confirm.",
+        "grade": null,
+        "injury_subtype": "Possible Tibial Stress Fracture"
+      }
+    },
+
+    "seek_compartment": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Persistent tightness or pressure that doesn't resolve with rest, especially with foot numbness, may indicate compartment syndrome. This needs prompt medical evaluation.",
+        "grade": null,
+        "injury_subtype": "Possible Compartment Syndrome"
+      }
+    },
+
+    "grade1_shin": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Shin Splints (MTSS) - Mild",
+        "timeline_days": [14, 28]
+      }
+    },
+
+    "grade2_shin": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Shin Splints (MTSS) - Moderate",
+        "timeline_days": [28, 56]
+      }
+    }
+  }
+}

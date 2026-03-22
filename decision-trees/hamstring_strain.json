@@ -1,0 +1,110 @@
+{
+  "injury_type": "hamstring_strain",
+  "display_name": "Hamstring Strain",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "mechanism",
+  "_clinical_notes": "Grade I: mild, can walk, minimal pain on palpation. Grade II: moderate, limp, palpable tenderness, pain with resisted knee flexion. Grade III: complete rupture or proximal avulsion — palpable defect, cannot flex knee against gravity, sudden proximal pain in young athletes = avulsion risk. Proximal avulsion (near ischial tuberosity) especially in adolescents requires imaging.",
+  "nodes": {
+    "mechanism": {
+      "prompt": "How did the hamstring get injured?",
+      "options": [
+        { "label": "Sprinting or sudden acceleration", "next_node_id": "location", "set_flags": { "mechanism": "sprint" } },
+        { "label": "Kicking or extreme stretch", "next_node_id": "location", "set_flags": { "mechanism": "stretch" } },
+        { "label": "Gradual tightness / overuse", "next_node_id": "location", "set_flags": { "mechanism": "overuse" } },
+        { "label": "Direct blow to the back of the thigh", "next_node_id": "direct_impact", "set_flags": { "mechanism": "impact" } }
+      ]
+    },
+
+    "direct_impact": {
+      "prompt": "After the blow, can you walk normally?",
+      "options": [
+        { "label": "Yes, mostly normal", "next_node_id": "location", "set_flags": {} },
+        { "label": "Limping but manageable", "next_node_id": "location", "set_flags": {} },
+        { "label": "Cannot walk / severe pain", "next_node_id": "seek_grade3", "set_flags": { "severity": "severe" } }
+      ]
+    },
+
+    "location": {
+      "prompt": "Where is most of the pain in your leg?",
+      "options": [
+        { "label": "High up near the sit bone / buttock crease", "next_node_id": "proximal_check", "set_flags": { "sublocation": "proximal" } },
+        { "label": "Middle of the back of the thigh", "next_node_id": "pop_hs", "set_flags": { "sublocation": "mid_belly" } },
+        { "label": "Back of the knee / lower thigh", "next_node_id": "pop_hs", "set_flags": { "sublocation": "distal" } }
+      ]
+    },
+
+    "proximal_check": {
+      "prompt": "Is the pain right at the sit bone (the bony bump you sit on), and does it feel sharp or tearing rather than just sore?",
+      "options": [
+        { "label": "Yes, sharp pain right at the sit bone", "next_node_id": "seek_avulsion", "set_flags": { "avulsion_flag": true } },
+        { "label": "Sore in the upper hamstring but not at the bone", "next_node_id": "pop_hs", "set_flags": { "avulsion_flag": false } }
+      ]
+    },
+
+    "pop_hs": {
+      "prompt": "Did you feel a pop, snap, or sudden giving-way sensation?",
+      "options": [
+        { "label": "Yes, a clear pop or snap", "next_node_id": "function_hs", "set_flags": { "pop": true } },
+        { "label": "No, just sudden pain", "next_node_id": "function_hs", "set_flags": { "pop": false } }
+      ]
+    },
+
+    "function_hs": {
+      "prompt": "How is your walking ability right now?",
+      "options": [
+        { "label": "Walking normally with mild discomfort", "next_node_id": "grade1", "set_flags": { "function": "good" } },
+        { "label": "Limping but can walk", "next_node_id": "knee_flex", "set_flags": { "function": "limited" } },
+        { "label": "Very difficult to walk / cannot", "next_node_id": "seek_grade3", "set_flags": { "function": "poor" } }
+      ]
+    },
+
+    "knee_flex": {
+      "prompt": "Can you bend your knee and try to lift your heel toward your buttock? (gentle attempt only — don't force it)",
+      "options": [
+        { "label": "Yes, painful but possible", "next_node_id": "grade2", "set_flags": { "knee_flex": "possible" } },
+        { "label": "Too painful to attempt or feels blocked", "next_node_id": "seek_grade3", "set_flags": { "knee_flex": "blocked" } }
+      ]
+    },
+
+    "seek_avulsion": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Pain at the sit bone after a sudden hamstring injury can indicate a proximal avulsion — a tearing of the tendon from the bone. This needs imaging to rule out.",
+        "grade": null,
+        "injury_subtype": "Suspected Proximal Hamstring Avulsion"
+      }
+    },
+
+    "seek_grade3": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Your symptoms suggest a severe (Grade III) hamstring strain or possible muscle rupture. You should be evaluated by a medical professional.",
+        "grade": "III",
+        "injury_subtype": "Severe Hamstring Strain - Grade III"
+      }
+    },
+
+    "grade1": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Hamstring Strain - Grade I",
+        "timeline_days": [7, 21]
+      }
+    },
+
+    "grade2": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Hamstring Strain - Grade II",
+        "timeline_days": [21, 56]
+      }
+    }
+  }
+}

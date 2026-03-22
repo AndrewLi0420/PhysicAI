@@ -1,0 +1,125 @@
+{
+  "injury_type": "ankle_sprain",
+  "display_name": "Ankle Sprain",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "mechanism",
+  "_clinical_notes": "Based on Ottawa Ankle Rules. Bony tenderness at malleoli or inability to bear weight = fracture rule-out = seek care. Grade I: micro-tear, full WB, mild swelling, 1-2 weeks. Grade II: partial tear, limited WB, 2-6 weeks. Grade III: complete tear, cannot WB, 4-8+ weeks.",
+  "nodes": {
+    "mechanism": {
+      "prompt": "How did the injury happen?",
+      "options": [
+        { "label": "Twisted or rolled my ankle", "next_node_id": "pop", "set_flags": { "mechanism": "twist" } },
+        { "label": "Direct hit or collision", "next_node_id": "bony_tenderness", "set_flags": { "mechanism": "impact" } },
+        { "label": "Gradual pain from running or overuse", "next_node_id": "overuse_location", "set_flags": { "mechanism": "overuse" } },
+        { "label": "Not sure / other", "next_node_id": "weightbear", "set_flags": { "mechanism": "unknown" } }
+      ]
+    },
+
+    "pop": {
+      "prompt": "Did you hear or feel a pop or snap at the moment of injury?",
+      "options": [
+        { "label": "Yes, I heard/felt a pop", "next_node_id": "weightbear", "set_flags": { "ligament_flag": true } },
+        { "label": "No pop", "next_node_id": "weightbear", "set_flags": { "ligament_flag": false } },
+        { "label": "Not sure", "next_node_id": "weightbear", "set_flags": { "ligament_flag": false } }
+      ]
+    },
+
+    "bony_tenderness": {
+      "prompt": "Press gently on the bony bumps on both sides of your ankle. Do you feel sharp pain or tenderness there?",
+      "options": [
+        { "label": "Yes, sharp pain on the bony bumps", "next_node_id": "seek_fracture", "set_flags": { "bony_tenderness": true } },
+        { "label": "Sore but mostly in the soft tissue", "next_node_id": "pop", "set_flags": { "bony_tenderness": false } },
+        { "label": "No tenderness at the bone", "next_node_id": "pop", "set_flags": { "bony_tenderness": false } }
+      ]
+    },
+
+    "overuse_location": {
+      "prompt": "Where is most of the pain?",
+      "options": [
+        { "label": "Outer side of ankle", "next_node_id": "weightbear", "set_flags": { "sublocation": "lateral" } },
+        { "label": "Inner side of ankle", "next_node_id": "weightbear", "set_flags": { "sublocation": "medial" } },
+        { "label": "Front of ankle", "next_node_id": "weightbear", "set_flags": { "sublocation": "anterior" } }
+      ]
+    },
+
+    "weightbear": {
+      "prompt": "Right after the injury, could you put weight on that foot?",
+      "options": [
+        { "label": "Yes, walked normally", "next_node_id": "swelling", "set_flags": { "weight_bearing": "full" } },
+        { "label": "Yes, but painful / limping", "next_node_id": "swelling", "set_flags": { "weight_bearing": "limited" } },
+        { "label": "Barely — needed support or crutch", "next_node_id": "swelling", "set_flags": { "weight_bearing": "minimal" } },
+        { "label": "Could not bear any weight", "next_node_id": "seek_grade3", "set_flags": { "weight_bearing": "none" } }
+      ]
+    },
+
+    "swelling": {
+      "prompt": "How quickly did swelling appear?",
+      "options": [
+        { "label": "Little or no swelling", "next_node_id": "function", "set_flags": { "swelling_rate": "none" } },
+        { "label": "Noticeable swelling within a few hours", "next_node_id": "function", "set_flags": { "swelling_rate": "moderate" } },
+        { "label": "Significant swelling within 30 minutes", "next_node_id": "seek_grade3", "set_flags": { "swelling_rate": "rapid" } }
+      ]
+    },
+
+    "function": {
+      "prompt": "How would you describe your ankle function right now?",
+      "options": [
+        { "label": "Some pain but I can walk without limping", "next_node_id": "grade1", "set_flags": { "function": "good" } },
+        { "label": "Limping but manageable", "next_node_id": "grade2", "set_flags": { "function": "limited" } },
+        { "label": "Very difficult to walk even slowly", "next_node_id": "grade2_high", "set_flags": { "function": "poor" } }
+      ]
+    },
+
+    "seek_fracture": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Bony tenderness at the ankle raises concern for a fracture. You should get an X-ray to rule this out.",
+        "grade": null,
+        "injury_subtype": "Possible Ankle Fracture"
+      }
+    },
+
+    "seek_grade3": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "You have signs of a severe (Grade III) ankle sprain or possible fracture. You should be evaluated by a medical professional.",
+        "grade": "III",
+        "injury_subtype": "Severe Ankle Sprain / Rule Out Fracture"
+      }
+    },
+
+    "grade1": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Lateral Ankle Sprain - Grade I",
+        "timeline_days": [7, 14]
+      }
+    },
+
+    "grade2": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Lateral Ankle Sprain - Grade II",
+        "timeline_days": [14, 42]
+      }
+    },
+
+    "grade2_high": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Lateral Ankle Sprain - Grade II (High)",
+        "timeline_days": [21, 42],
+        "monitor_note": "If no improvement in 48 hours or pain worsens, seek evaluation."
+      }
+    }
+  }
+}

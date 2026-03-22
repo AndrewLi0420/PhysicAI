@@ -1,0 +1,151 @@
+{
+  "injury_type": "finger_sprain",
+  "display_name": "Finger Sprain",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "deformity_finger",
+  "_clinical_notes": "Key differentials: (1) Mallet finger: cannot extend DIP joint (fingertip droops) = extensor tendon rupture = splinting required = seek care. (2) Jersey finger: cannot flex DIP (can't curl fingertip) = FDP avulsion = surgical if complete = seek care. (3) Volar plate injury: hyperextension PIP, most common, Grade I-II conservative with buddy taping. (4) Visible deformity/dislocation = seek care. (5) Thumb UCL (Skier's/Gamekeeper's): valgus stress to thumb MCP, instability = seek care if Grade III (complete).",
+  "nodes": {
+    "deformity_finger": {
+      "prompt": "Look at the injured finger. Is it visibly bent, crooked, or clearly out of position?",
+      "options": [
+        { "label": "Yes, looks deformed or out of place", "next_node_id": "seek_dislocation_finger", "set_flags": { "deformity": true } },
+        { "label": "No — swollen but positioned normally", "next_node_id": "which_finger", "set_flags": { "deformity": false } }
+      ]
+    },
+
+    "which_finger": {
+      "prompt": "Which finger is injured?",
+      "options": [
+        { "label": "Thumb", "next_node_id": "thumb_mechanism", "set_flags": { "finger": "thumb" } },
+        { "label": "Index, middle, ring, or pinky finger", "next_node_id": "which_joint", "set_flags": { "finger": "digit" } }
+      ]
+    },
+
+    "thumb_mechanism": {
+      "prompt": "How was the thumb injured?",
+      "options": [
+        { "label": "Bent toward the palm or sideways (e.g., fell on thumb, ball hit thumb)", "next_node_id": "thumb_instability", "set_flags": { "mechanism": "valgus_thumb", "ligament": "UCL" } },
+        { "label": "Jammed straight on (e.g., catching a ball)", "next_node_id": "which_joint_thumb", "set_flags": { "mechanism": "jam" } }
+      ]
+    },
+
+    "thumb_instability": {
+      "prompt": "Does the thumb feel unstable — like it gives way when you try to pinch?",
+      "options": [
+        { "label": "Yes, feels loose or unstable", "next_node_id": "seek_ucl", "set_flags": { "instability": true } },
+        { "label": "Painful but stable", "next_node_id": "grade2_finger", "set_flags": { "instability": false } }
+      ]
+    },
+
+    "which_joint_thumb": {
+      "prompt": "Which joint is most painful?",
+      "options": [
+        { "label": "Knuckle at the base of the thumb (MCP joint)", "next_node_id": "finger_extend", "set_flags": { "joint": "MCP" } },
+        { "label": "Middle thumb joint (IP joint)", "next_node_id": "finger_extend", "set_flags": { "joint": "IP" } }
+      ]
+    },
+
+    "which_joint": {
+      "prompt": "Which joint is most painful?",
+      "options": [
+        { "label": "Middle joint (PIP — second knuckle from tip)", "next_node_id": "pip_mechanism", "set_flags": { "joint": "PIP" } },
+        { "label": "Tip joint (DIP — closest to fingernail)", "next_node_id": "finger_extend", "set_flags": { "joint": "DIP" } },
+        { "label": "Knuckle (MCP — where finger meets hand)", "next_node_id": "finger_extend", "set_flags": { "joint": "MCP" } }
+      ]
+    },
+
+    "pip_mechanism": {
+      "prompt": "How was the PIP joint (middle knuckle) injured?",
+      "options": [
+        { "label": "Finger bent backward (hyperextension)", "next_node_id": "finger_flex", "set_flags": { "mechanism": "hyperextension", "injury": "volar_plate" } },
+        { "label": "Jammed straight (e.g., ball hit fingertip)", "next_node_id": "finger_flex", "set_flags": { "mechanism": "jam" } },
+        { "label": "Bent sideways / collision", "next_node_id": "finger_flex", "set_flags": { "mechanism": "lateral" } }
+      ]
+    },
+
+    "finger_extend": {
+      "prompt": "Can you fully straighten (extend) the tip of the finger?",
+      "options": [
+        { "label": "Yes, straightens fully", "next_node_id": "finger_flex", "set_flags": { "extension": "full" } },
+        { "label": "Fingertip droops — cannot straighten the tip", "next_node_id": "seek_mallet", "set_flags": { "extension": "blocked", "mallet_flag": true } }
+      ]
+    },
+
+    "finger_flex": {
+      "prompt": "Can you curl the tip of the injured finger (bend the fingertip down)?",
+      "options": [
+        { "label": "Yes, can curl it (may be painful)", "next_node_id": "severity_finger", "set_flags": { "flexion": "possible" } },
+        { "label": "Cannot curl the fingertip — it won't bend", "next_node_id": "seek_jersey", "set_flags": { "flexion": "blocked", "jersey_flag": true } }
+      ]
+    },
+
+    "severity_finger": {
+      "prompt": "How is the swelling and pain?",
+      "options": [
+        { "label": "Mild swelling, tender but functional", "next_node_id": "grade1_finger", "set_flags": { "severity": "mild" } },
+        { "label": "Moderate swelling, movement is painful but possible", "next_node_id": "grade2_finger", "set_flags": { "severity": "moderate" } }
+      ]
+    },
+
+    "seek_dislocation_finger": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "A visibly deformed or dislocated finger needs to be examined and reduced by a medical professional. Do not attempt to reduce it yourself.",
+        "grade": null,
+        "injury_subtype": "Finger Dislocation / Possible Fracture"
+      }
+    },
+
+    "seek_ucl": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "An unstable thumb after a valgus injury may indicate a complete UCL tear (Skier's/Gamekeeper's Thumb). This often requires surgical evaluation.",
+        "grade": "III",
+        "injury_subtype": "Thumb UCL Tear (Skier's/Gamekeeper's Thumb)"
+      }
+    },
+
+    "seek_mallet": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Inability to straighten the fingertip indicates a mallet finger (extensor tendon rupture). This requires splinting for 6-8 weeks and needs medical evaluation.",
+        "grade": null,
+        "injury_subtype": "Mallet Finger (Extensor Tendon Rupture)"
+      }
+    },
+
+    "seek_jersey": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Inability to curl the fingertip may indicate a Jersey Finger (FDP tendon avulsion). Complete tears often require surgical repair and need prompt evaluation.",
+        "grade": null,
+        "injury_subtype": "Possible Jersey Finger (FDP Avulsion)"
+      }
+    },
+
+    "grade1_finger": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Finger Sprain / Volar Plate Injury - Grade I",
+        "timeline_days": [7, 21]
+      }
+    },
+
+    "grade2_finger": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Finger Sprain / Volar Plate Injury - Grade II",
+        "timeline_days": [14, 42]
+      }
+    }
+  }
+}
