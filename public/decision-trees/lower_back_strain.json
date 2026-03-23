@@ -1,0 +1,124 @@
+{
+  "injury_type": "lower_back_strain",
+  "display_name": "Lower Back Strain",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "red_flag_neuro",
+  "_clinical_notes": "CRITICAL red flags first: (1) Bladder/bowel dysfunction + saddle numbness = cauda equina = emergency. (2) Radiculopathy below knee with numbness/weakness = disc involvement = PT/physician referral. (3) High-velocity trauma in young athlete + severe pain = possible fracture (spondylolysis/spondylolisthesis in adolescents). Grade I-II muscle strain is the vast majority and is conservative. Mechanism: lifting+twisting most common. Assess: local vs. radiating, WB status, neuro symptoms.",
+  "nodes": {
+    "red_flag_neuro": {
+      "prompt": "Do you have any of the following? (select the best match)",
+      "options": [
+        { "label": "Loss of bladder or bowel control", "next_node_id": "seek_emergency", "set_flags": { "cauda_equina_flag": true } },
+        { "label": "Numbness in the groin or inner thighs", "next_node_id": "seek_emergency", "set_flags": { "cauda_equina_flag": true } },
+        { "label": "None of the above", "next_node_id": "radiation", "set_flags": { "cauda_equina_flag": false } }
+      ]
+    },
+
+    "radiation": {
+      "prompt": "Does the pain travel down your leg?",
+      "options": [
+        { "label": "No — stays in the lower back / buttock", "next_node_id": "mechanism", "set_flags": { "radiation": "none" } },
+        { "label": "Yes, into the buttock or upper thigh only", "next_node_id": "mechanism", "set_flags": { "radiation": "buttock" } },
+        { "label": "Yes, shoots below the knee — with tingling or numbness", "next_node_id": "seek_nerve", "set_flags": { "radiation": "below_knee", "neuro_flag": true } }
+      ]
+    },
+
+    "mechanism": {
+      "prompt": "How did the back get injured?",
+      "options": [
+        { "label": "Lifting something heavy or twisting suddenly", "next_node_id": "weightbear_back", "set_flags": { "mechanism": "lift_twist" } },
+        { "label": "Direct collision or high-impact fall", "next_node_id": "impact_back", "set_flags": { "mechanism": "impact" } },
+        { "label": "Gradual stiffness / overuse", "next_node_id": "weightbear_back", "set_flags": { "mechanism": "overuse" } }
+      ]
+    },
+
+    "impact_back": {
+      "prompt": "After the impact, can you walk normally?",
+      "options": [
+        { "label": "Yes, walking fine", "next_node_id": "weightbear_back", "set_flags": {} },
+        { "label": "Walking with difficulty", "next_node_id": "weightbear_back", "set_flags": {} },
+        { "label": "Cannot stand or walk / severe pain", "next_node_id": "seek_fracture_back", "set_flags": { "fracture_flag": true } }
+      ]
+    },
+
+    "weightbear_back": {
+      "prompt": "Can you stand upright and walk?",
+      "options": [
+        { "label": "Yes, upright and walking normally (some pain)", "next_node_id": "severity_back", "set_flags": { "mobility": "good" } },
+        { "label": "Walking bent forward or with a limp", "next_node_id": "severity_back", "set_flags": { "mobility": "limited" } },
+        { "label": "Cannot stand or walk due to pain", "next_node_id": "seek_fracture_back", "set_flags": { "mobility": "none" } }
+      ]
+    },
+
+    "severity_back": {
+      "prompt": "How would you rate the pain at rest (not moving)?",
+      "options": [
+        { "label": "Mild — noticeable but not constant", "next_node_id": "grade1", "set_flags": { "severity": "mild" } },
+        { "label": "Moderate — constant ache, limits activity", "next_node_id": "grade2", "set_flags": { "severity": "moderate" } },
+        { "label": "Severe — very painful even at rest", "next_node_id": "grade2_high", "set_flags": { "severity": "severe" } }
+      ]
+    },
+
+    "seek_emergency": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Bladder/bowel changes or groin numbness after a back injury may indicate cauda equina syndrome — a medical emergency. Go to the ER now.",
+        "grade": null,
+        "injury_subtype": "Possible Cauda Equina Syndrome — Emergency"
+      }
+    },
+
+    "seek_nerve": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Pain shooting below the knee with numbness or tingling suggests nerve involvement (possible disc herniation). You should see a physician or PT for evaluation.",
+        "grade": null,
+        "injury_subtype": "Lumbar Radiculopathy / Possible Disc Herniation"
+      }
+    },
+
+    "seek_fracture_back": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Severe back pain with inability to bear weight after trauma warrants imaging to rule out a vertebral fracture.",
+        "grade": null,
+        "injury_subtype": "Possible Vertebral Fracture / Serious Back Injury"
+      }
+    },
+
+    "grade1": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Lower Back Muscle Strain - Grade I",
+        "timeline_days": [7, 14]
+      }
+    },
+
+    "grade2": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Lower Back Muscle Strain - Grade II",
+        "timeline_days": [14, 42]
+      }
+    },
+
+    "grade2_high": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Lower Back Muscle Strain - Grade II (High)",
+        "timeline_days": [21, 56],
+        "monitor_note": "If pain is worsening or leg symptoms develop, seek evaluation within 48 hours."
+      }
+    }
+  }
+}

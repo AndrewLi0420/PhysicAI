@@ -1,0 +1,112 @@
+{
+  "injury_type": "wrist_sprain",
+  "display_name": "Wrist Sprain",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "mechanism",
+  "_clinical_notes": "CRITICAL: Anatomical snuffbox (hollow between thumb extensor tendons on dorsal-radial wrist) tenderness after FOOSH = scaphoid fracture until proven otherwise — high miss rate, significant morbidity if missed. Refer even if X-ray negative. Distal radius fracture: obvious swelling/deformity after FOOSH, especially in young athletes. TFCC (ulnar side, clicking): can manage conservatively if mild but should be evaluated. Grades: I = micro-tear, II = partial, III = complete ligament rupture.",
+  "nodes": {
+    "mechanism": {
+      "prompt": "How did the wrist get injured?",
+      "options": [
+        { "label": "Fell on an outstretched hand (FOOSH)", "next_node_id": "deformity_wrist", "set_flags": { "mechanism": "foosh" } },
+        { "label": "Wrist bent or twisted awkwardly", "next_node_id": "location_wrist", "set_flags": { "mechanism": "twist" } },
+        { "label": "Direct blow to the wrist", "next_node_id": "deformity_wrist", "set_flags": { "mechanism": "impact" } },
+        { "label": "Gradual pain / overuse", "next_node_id": "location_wrist", "set_flags": { "mechanism": "overuse" } }
+      ]
+    },
+
+    "deformity_wrist": {
+      "prompt": "Is there visible deformity, significant swelling, or a 'dinner fork' shape to the wrist?",
+      "options": [
+        { "label": "Yes, obviously deformed or extremely swollen", "next_node_id": "seek_fracture_wrist", "set_flags": { "deformity": true } },
+        { "label": "Swollen but no obvious deformity", "next_node_id": "snuffbox", "set_flags": { "deformity": false } }
+      ]
+    },
+
+    "snuffbox": {
+      "prompt": "Press into the small hollow on the thumb side of your wrist (the 'snuffbox' — just below the base of your thumb). Is it very tender?",
+      "options": [
+        { "label": "Yes, very tender there", "next_node_id": "seek_scaphoid", "set_flags": { "snuffbox_tenderness": true } },
+        { "label": "No tenderness or mild only", "next_node_id": "location_wrist", "set_flags": { "snuffbox_tenderness": false } }
+      ]
+    },
+
+    "location_wrist": {
+      "prompt": "Where is most of the pain?",
+      "options": [
+        { "label": "Thumb side / radial side", "next_node_id": "snuffbox", "set_flags": { "sublocation": "radial" } },
+        { "label": "Pinky side / ulnar side", "next_node_id": "click_wrist", "set_flags": { "sublocation": "ulnar" } },
+        { "label": "Back of the wrist", "next_node_id": "function_wrist", "set_flags": { "sublocation": "dorsal" } },
+        { "label": "Palm side", "next_node_id": "function_wrist", "set_flags": { "sublocation": "volar" } }
+      ]
+    },
+
+    "click_wrist": {
+      "prompt": "Do you notice a clicking or clunking sensation when you move the wrist?",
+      "options": [
+        { "label": "Yes, clicking or clunking", "next_node_id": "seek_tfcc", "set_flags": { "click_flag": true } },
+        { "label": "No clicking", "next_node_id": "function_wrist", "set_flags": { "click_flag": false } }
+      ]
+    },
+
+    "function_wrist": {
+      "prompt": "Can you make a fist and grip something?",
+      "options": [
+        { "label": "Yes, full grip with some pain", "next_node_id": "grade1_wrist", "set_flags": { "grip": "good" } },
+        { "label": "Reduced grip — uncomfortable", "next_node_id": "grade2_wrist", "set_flags": { "grip": "limited" } },
+        { "label": "Cannot grip or make a fist", "next_node_id": "seek_fracture_wrist", "set_flags": { "grip": "none" } }
+      ]
+    },
+
+    "seek_fracture_wrist": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Visible deformity, extreme swelling, or inability to grip after a wrist injury may indicate a fracture. You need an X-ray.",
+        "grade": null,
+        "injury_subtype": "Possible Wrist Fracture (Distal Radius)"
+      }
+    },
+
+    "seek_scaphoid": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Tenderness in the anatomical snuffbox after a wrist injury strongly suggests a scaphoid fracture — one of the most commonly missed fractures. You need an X-ray (and possibly MRI) even if the X-ray looks normal.",
+        "grade": null,
+        "injury_subtype": "Possible Scaphoid Fracture"
+      }
+    },
+
+    "seek_tfcc": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Clicking on the ulnar (pinky) side of the wrist may indicate a TFCC (triangular fibrocartilage complex) tear. This benefits from evaluation to confirm and guide treatment.",
+        "grade": null,
+        "injury_subtype": "Possible TFCC Injury"
+      }
+    },
+
+    "grade1_wrist": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Wrist Sprain - Grade I",
+        "timeline_days": [7, 14]
+      }
+    },
+
+    "grade2_wrist": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Wrist Sprain - Grade II",
+        "timeline_days": [14, 42]
+      }
+    }
+  }
+}

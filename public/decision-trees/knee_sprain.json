@@ -1,0 +1,148 @@
+{
+  "injury_type": "knee_sprain",
+  "display_name": "Knee Sprain",
+  "version": "draft-0.1",
+  "pt_reviewed": false,
+  "start": "mechanism",
+  "_clinical_notes": "Ottawa Knee Rules: unable to flex >90°, isolated patella tenderness, fibula head tenderness, age >55, cannot bear weight = seek care for fracture rule-out. ACL pattern: non-contact pivot/deceleration, pop, immediate swelling, instability = seek care (needs MRI). MCL/LCL: valgus/varus force, medial/lateral pain, Grade I-II usually conservative.",
+  "nodes": {
+    "mechanism": {
+      "prompt": "How did the knee get injured?",
+      "options": [
+        { "label": "Planted foot and twisted / pivoted", "next_node_id": "pop_acl", "set_flags": { "mechanism": "pivot" } },
+        { "label": "Hit from the side or a direct blow to the knee", "next_node_id": "impact_side", "set_flags": { "mechanism": "impact" } },
+        { "label": "Knee bent backward (hyperextended)", "next_node_id": "hyperextend_wb", "set_flags": { "mechanism": "hyperextension" } },
+        { "label": "Gradual pain / overuse", "next_node_id": "overuse_location", "set_flags": { "mechanism": "overuse" } }
+      ]
+    },
+
+    "pop_acl": {
+      "prompt": "Did you hear or feel a pop at the moment of injury?",
+      "options": [
+        { "label": "Yes, a clear pop", "next_node_id": "swelling_speed", "set_flags": { "pop": true, "acl_flag": true } },
+        { "label": "No pop", "next_node_id": "swelling_speed", "set_flags": { "pop": false } },
+        { "label": "Not sure", "next_node_id": "swelling_speed", "set_flags": { "pop": false } }
+      ]
+    },
+
+    "swelling_speed": {
+      "prompt": "How quickly did swelling appear inside the knee?",
+      "options": [
+        { "label": "Significant swelling within 1-2 hours", "next_node_id": "seek_acl", "set_flags": { "hemarthrosis_flag": true } },
+        { "label": "Mild swelling over several hours or next day", "next_node_id": "stability", "set_flags": { "hemarthrosis_flag": false } },
+        { "label": "Little or no swelling", "next_node_id": "stability", "set_flags": { "hemarthrosis_flag": false } }
+      ]
+    },
+
+    "impact_side": {
+      "prompt": "Where is the pain on the knee?",
+      "options": [
+        { "label": "Inner (medial) side", "next_node_id": "weightbear", "set_flags": { "sublocation": "medial", "ligament": "MCL" } },
+        { "label": "Outer (lateral) side", "next_node_id": "weightbear", "set_flags": { "sublocation": "lateral", "ligament": "LCL" } },
+        { "label": "On the kneecap / front", "next_node_id": "patella_tenderness", "set_flags": { "sublocation": "anterior" } }
+      ]
+    },
+
+    "patella_tenderness": {
+      "prompt": "Is there tenderness directly on the kneecap (patella) when you press on it?",
+      "options": [
+        { "label": "Yes, very tender on the kneecap", "next_node_id": "seek_fracture", "set_flags": { "patella_tenderness": true } },
+        { "label": "Tender around the kneecap but not on the bone", "next_node_id": "weightbear", "set_flags": { "patella_tenderness": false } }
+      ]
+    },
+
+    "hyperextend_wb": {
+      "prompt": "Can you straighten your knee all the way and bear weight?",
+      "options": [
+        { "label": "Yes, full extension and weight-bearing", "next_node_id": "stability", "set_flags": { "extension": "full" } },
+        { "label": "Can straighten but painful to bear weight", "next_node_id": "stability", "set_flags": { "extension": "painful" } },
+        { "label": "Cannot fully straighten or cannot bear weight", "next_node_id": "seek_fracture", "set_flags": { "extension": "blocked" } }
+      ]
+    },
+
+    "overuse_location": {
+      "prompt": "Where is most of the pain?",
+      "options": [
+        { "label": "Front of knee / below kneecap", "next_node_id": "weightbear", "set_flags": { "sublocation": "anterior", "pattern": "patellar_tendon" } },
+        { "label": "Inner side", "next_node_id": "weightbear", "set_flags": { "sublocation": "medial" } },
+        { "label": "Outer side", "next_node_id": "weightbear", "set_flags": { "sublocation": "lateral", "pattern": "ITB_flag" } }
+      ]
+    },
+
+    "stability": {
+      "prompt": "Does your knee feel unstable or like it might give way?",
+      "options": [
+        { "label": "Yes, it feels loose or buckles", "next_node_id": "seek_acl", "set_flags": { "instability": true } },
+        { "label": "No, feels stable even if painful", "next_node_id": "weightbear", "set_flags": { "instability": false } }
+      ]
+    },
+
+    "weightbear": {
+      "prompt": "Can you bear weight on the injured leg?",
+      "options": [
+        { "label": "Yes, I can walk (may be limping)", "next_node_id": "grade_classify", "set_flags": { "weight_bearing": "yes" } },
+        { "label": "Cannot bear weight at all", "next_node_id": "seek_fracture", "set_flags": { "weight_bearing": "none" } }
+      ]
+    },
+
+    "grade_classify": {
+      "prompt": "How severe is the pain and how limited is your movement?",
+      "options": [
+        { "label": "Mild pain, nearly normal movement", "next_node_id": "grade1", "set_flags": { "severity": "mild" } },
+        { "label": "Moderate pain, limited range of motion", "next_node_id": "grade2", "set_flags": { "severity": "moderate" } },
+        { "label": "Severe pain, very restricted movement", "next_node_id": "grade2_high", "set_flags": { "severity": "severe" } }
+      ]
+    },
+
+    "seek_acl": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Your symptoms (pop, rapid swelling, instability) are consistent with a significant ligament injury such as an ACL tear. You need an evaluation and likely an MRI.",
+        "grade": "III",
+        "injury_subtype": "Suspected ACL / Major Knee Ligament Injury"
+      }
+    },
+
+    "seek_fracture": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": true,
+        "seek_care_reason": "Signs of a possible fracture or serious structural injury. You should get an X-ray and medical evaluation.",
+        "grade": null,
+        "injury_subtype": "Possible Knee Fracture / Serious Structural Injury"
+      }
+    },
+
+    "grade1": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "I",
+        "injury_subtype": "Knee Ligament Sprain - Grade I",
+        "timeline_days": [7, 14]
+      }
+    },
+
+    "grade2": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Knee Ligament Sprain - Grade II",
+        "timeline_days": [14, 42]
+      }
+    },
+
+    "grade2_high": {
+      "terminal": true,
+      "outcome": {
+        "seek_care": false,
+        "grade": "II",
+        "injury_subtype": "Knee Ligament Sprain - Grade II (High)",
+        "timeline_days": [21, 56],
+        "monitor_note": "If no improvement in 48-72 hours or pain/swelling worsens, seek evaluation."
+      }
+    }
+  }
+}

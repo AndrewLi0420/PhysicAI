@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "version": "stub-0.1",
+    "version": "stub-0.2",
     "pt_reviewed": false,
-    "total_exercises": 27,
-    "note": "Stub library — 3 exercises per injury category, one per phase. Expand to 60-80 exercises before launch with PT review."
+    "total_exercises": 56,
+    "note": "Expanded library — 6-7 exercises per injury category, 2 options per phase. Requires PT review before launch."
   },
   "exercises": [
 
@@ -11,6 +11,16 @@
       "exercise_id": "ankle-elevation-ice",
       "name": "Ankle Elevation + Ice",
       "description": "Lie down and prop your ankle above heart level on 2-3 pillows. Apply an ice pack wrapped in a cloth to the ankle for 15-20 minutes. Rest and avoid putting weight on it.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": 1200,
+      "phase": "1_pain_control",
+      "injury_types": ["ankle_sprain"]
+    },
+    {
+      "exercise_id": "ankle-compression-rest",
+      "name": "Compression Wrap + Rest",
+      "description": "Wrap the ankle with a compression bandage starting at the toes and overlapping each layer by 50% as you work up the ankle. Snug but not tight — you should be able to slide a finger under it. Elevate and rest for 20 minutes. Rewrap if it feels loose or causes numbness.",
       "sets": null,
       "reps": null,
       "duration_sec": 1200,
@@ -28,12 +38,42 @@
       "injury_types": ["ankle_sprain"]
     },
     {
+      "exercise_id": "ankle-calf-raise",
+      "name": "Double-Leg Calf Raise",
+      "description": "Stand with feet hip-width apart, hands lightly on a wall for balance. Rise onto both sets of toes over 2 seconds, hold 1 second at the top, then lower slowly over 3 seconds. Keep the movement even through both legs. Progress to a single-leg version only when pain-free.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["ankle_sprain", "shin_splints"]
+    },
+    {
       "exercise_id": "ankle-single-leg-balance",
       "name": "Single-Leg Balance",
       "description": "Stand on the injured leg with a slight bend in the knee. Hold for 30 seconds without touching down. Progress: close your eyes, then stand on a folded towel. Have a wall nearby for safety.",
       "sets": 3,
       "reps": null,
       "duration_sec": 30,
+      "phase": "3_return_to_sport",
+      "injury_types": ["ankle_sprain"]
+    },
+    {
+      "exercise_id": "ankle-hop-landing",
+      "name": "Two-Foot Hop and Stick Landing",
+      "description": "Stand on both feet and hop forward a short distance (6-12 inches). Land softly with bent knees and hold the landing for 3 seconds. Focus on quiet, controlled landings — no wobbling. Once pain-free, progress to hopping side to side, then single-leg.",
+      "sets": 3,
+      "reps": 10,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["ankle_sprain"]
+    },
+    {
+      "exercise_id": "ankle-lateral-hop",
+      "name": "Lateral Hop Progression",
+      "description": "Stand beside a small line on the floor. Hop laterally over the line and back, landing softly on both feet. Once comfortable, progress to single-leg lateral hops. Keep hips level and land through your whole foot. Stop if pain exceeds 2/10.",
+      "sets": 3,
+      "reps": 10,
+      "duration_sec": null,
       "phase": "3_return_to_sport",
       "injury_types": ["ankle_sprain"]
     },
@@ -49,9 +89,29 @@
       "injury_types": ["knee_sprain"]
     },
     {
+      "exercise_id": "knee-patellar-mobilization",
+      "name": "Patellar Mobilization",
+      "description": "Sit with the injured leg straight and muscles relaxed. Using your thumbs, gently glide the kneecap up, down, left, and right — about 10-15 mm each direction. Hold each glide 5 seconds. This prevents the kneecap from stiffening while the joint rests. Stop immediately if any grinding or sharp pain occurs.",
+      "sets": 2,
+      "reps": 10,
+      "duration_sec": null,
+      "phase": "1_pain_control",
+      "injury_types": ["knee_sprain"]
+    },
+    {
       "exercise_id": "knee-straight-leg-raise",
       "name": "Straight Leg Raise",
       "description": "Lie on your back. Bend the uninjured knee so that foot is flat. Keep the injured leg straight and tighten the quad. Raise the straight leg to the height of the bent knee, hold 2 seconds, lower slowly. Do not let the lower back arch.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["knee_sprain"]
+    },
+    {
+      "exercise_id": "knee-terminal-extension",
+      "name": "Terminal Knee Extension (Band)",
+      "description": "Loop a resistance band around a fixed object at knee height and step backward until the band pulls lightly against the back of your knee. Stand with a slight bend in the injured knee. Squeeze the quad to straighten the knee fully, hold 2 seconds, then slowly return to the starting bend. Keep the upper body still.",
       "sets": 3,
       "reps": 15,
       "duration_sec": null,
@@ -68,6 +128,26 @@
       "phase": "3_return_to_sport",
       "injury_types": ["knee_sprain"]
     },
+    {
+      "exercise_id": "knee-step-up",
+      "name": "Forward Step-Up",
+      "description": "Stand in front of a step (6-8 inches). Step up with the injured leg, drive through the heel, and bring the other foot up. Step back down leading with the uninjured leg. Keep the knee tracking over the second toe. Add weight only when bodyweight is pain-free.",
+      "sets": 3,
+      "reps": 12,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["knee_sprain"]
+    },
+    {
+      "exercise_id": "knee-wall-sit",
+      "name": "Wall Sit",
+      "description": "Stand with your back flat against a wall. Slide down until knees are at roughly 60 degrees (not below 90). Hold the position for 20-30 seconds. Keep weight even across both feet and back flush to the wall. Progress the duration by 5 seconds each session.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 30,
+      "phase": "3_return_to_sport",
+      "injury_types": ["knee_sprain"]
+    },
 
     {
       "exercise_id": "hamstring-prone-ice",
@@ -76,6 +156,16 @@
       "sets": null,
       "reps": null,
       "duration_sec": 1200,
+      "phase": "1_pain_control",
+      "injury_types": ["hamstring_strain"]
+    },
+    {
+      "exercise_id": "hamstring-pain-free-stretch",
+      "name": "Pain-Free Hamstring Stretch",
+      "description": "Lie on your back. Slowly raise the injured leg with the knee slightly bent until you feel a gentle pull — stop before any pain. Hold 20 seconds. This is a passive stretch within the pain-free range only. If the pull becomes sharp, bend the knee more. Do not push through discomfort in this phase.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 20,
       "phase": "1_pain_control",
       "injury_types": ["hamstring_strain"]
     },
@@ -90,11 +180,31 @@
       "injury_types": ["hamstring_strain"]
     },
     {
+      "exercise_id": "hamstring-bridge",
+      "name": "Glute Bridge",
+      "description": "Lie on your back with knees bent, feet flat and hip-width apart. Drive through your heels to lift your hips off the floor until your body forms a straight line from shoulders to knees. Hold 2 seconds at the top, lower slowly. Squeeze your glutes at the top — avoid arching the lower back.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["hamstring_strain", "lower_back_strain"]
+    },
+    {
       "exercise_id": "hamstring-nordic-eccentric",
       "name": "Nordic Hamstring Curl (Eccentric)",
       "description": "Kneel on a soft surface with feet secured under a couch or partner. Arms crossed on chest. Slowly lower your body forward by extending at the knees — resist the fall with your hamstrings. Use your hands to catch yourself at the bottom, then use your arms to push back to the start. This is an advanced eccentric exercise — only perform if pain-free during the previous phase.",
       "sets": 3,
       "reps": 6,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["hamstring_strain"]
+    },
+    {
+      "exercise_id": "hamstring-single-leg-rdl",
+      "name": "Single-Leg Romanian Deadlift",
+      "description": "Stand on the injured leg with a slight knee bend. Hinge at the hip and lower your torso forward while the free leg extends behind you for balance — aim for a flat back and horizontal torso. Return to standing by driving through the planted heel. Use a light weight in the opposite hand for progression.",
+      "sets": 3,
+      "reps": 10,
       "duration_sec": null,
       "phase": "3_return_to_sport",
       "injury_types": ["hamstring_strain"]
@@ -111,9 +221,29 @@
       "injury_types": ["groin_strain"]
     },
     {
+      "exercise_id": "groin-hip-flexor-stretch",
+      "name": "Kneeling Hip Flexor Stretch",
+      "description": "Kneel on the injured leg's knee and step the other foot forward. Gently shift your weight forward until you feel a stretch at the front of the kneeling hip — not in the groin. Hold 20-30 seconds. Keep your torso upright. This decompresses the hip and relieves proximal groin tension.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 30,
+      "phase": "1_pain_control",
+      "injury_types": ["groin_strain"]
+    },
+    {
       "exercise_id": "groin-side-lying-adduction",
       "name": "Side-Lying Hip Adduction",
       "description": "Lie on the injured side with the bottom leg straight. Bend the top leg and rest it in front of you. Slowly raise the bottom (injured) leg 12-18 inches off the floor, hold 2 seconds, lower slowly. Keep toes pointing forward.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["groin_strain"]
+    },
+    {
+      "exercise_id": "groin-standing-adduction-band",
+      "name": "Standing Hip Adduction (Band)",
+      "description": "Attach a resistance band to the injured leg's ankle and anchor it to the side. Stand on the uninjured leg and pull the banded leg across your body (adduction), hold 1 second, return slowly. Keep pelvis level. Start with light resistance and increase only when pain-free.",
       "sets": 3,
       "reps": 15,
       "duration_sec": null,
@@ -130,6 +260,16 @@
       "phase": "3_return_to_sport",
       "injury_types": ["groin_strain"]
     },
+    {
+      "exercise_id": "groin-copenhagen-plank",
+      "name": "Copenhagen Adductor Plank",
+      "description": "Lie on your side with your top foot resting on a bench or chair seat (knee height). Support yourself on your bottom elbow. Lift your hips off the floor so your body is in a straight line. Hold. The adductor of the top leg is working isometrically. Begin with knees on the bench (easier) before progressing to straight-leg version.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 20,
+      "phase": "3_return_to_sport",
+      "injury_types": ["groin_strain"]
+    },
 
     {
       "exercise_id": "shoulder-pendulum",
@@ -142,9 +282,29 @@
       "injury_types": ["shoulder_sprain"]
     },
     {
+      "exercise_id": "shoulder-scapular-squeeze",
+      "name": "Scapular Retraction (Isometric)",
+      "description": "Sit or stand with arms at your sides. Gently squeeze your shoulder blades together as if holding a pencil between them. Hold 5 seconds, fully release. Keep the shoulders down — do not shrug. This activates the lower trapezius and stabilizes the injured shoulder without stressing the joint.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "1_pain_control",
+      "injury_types": ["shoulder_sprain"]
+    },
+    {
       "exercise_id": "shoulder-external-rotation-band",
       "name": "Shoulder External Rotation (Band)",
       "description": "Stand with a light resistance band anchored at elbow height. Hold the band with the injured arm, elbow bent at 90 degrees and tucked to your side. Rotate your forearm outward (away from body) against band resistance. Control the return. Keep the elbow glued to your side throughout.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["shoulder_sprain"]
+    },
+    {
+      "exercise_id": "shoulder-side-lying-er",
+      "name": "Side-Lying External Rotation",
+      "description": "Lie on the uninjured side with the injured arm on top. Bend the top elbow to 90 degrees, forearm pointing down toward the floor. Rotate the forearm upward (toward the ceiling) keeping the elbow against your side. Slowly lower. Use a light weight (0.5-1 kg) or start with no weight.",
       "sets": 3,
       "reps": 15,
       "duration_sec": null,
@@ -161,6 +321,16 @@
       "phase": "3_return_to_sport",
       "injury_types": ["shoulder_sprain"]
     },
+    {
+      "exercise_id": "shoulder-wall-push-up",
+      "name": "Wall Push-Up",
+      "description": "Stand facing a wall, arms extended at shoulder height and width. Bend the elbows to bring your chest toward the wall, keeping the body in a straight plank line. Push back to start. Progress by stepping further from the wall to increase load. Advance to incline push-ups on a counter when wall push-ups are pain-free.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["shoulder_sprain"]
+    },
 
     {
       "exercise_id": "back-knee-to-chest",
@@ -169,6 +339,16 @@
       "sets": 2,
       "reps": null,
       "duration_sec": 30,
+      "phase": "1_pain_control",
+      "injury_types": ["lower_back_strain"]
+    },
+    {
+      "exercise_id": "back-cat-cow",
+      "name": "Cat-Cow Mobility",
+      "description": "Start on hands and knees with a neutral spine. Inhale and let your belly drop toward the floor while lifting your head and tailbone (cow). Exhale and round your spine toward the ceiling, tucking chin and pelvis (cat). Move slowly and synchronize with your breath. 10 full cycles.",
+      "sets": 2,
+      "reps": 10,
+      "duration_sec": null,
       "phase": "1_pain_control",
       "injury_types": ["lower_back_strain"]
     },
@@ -183,12 +363,32 @@
       "injury_types": ["lower_back_strain"]
     },
     {
+      "exercise_id": "back-glute-bridge",
+      "name": "Glute Bridge",
+      "description": "Lie on your back with knees bent and feet flat. Drive through heels to lift your hips, forming a straight line from shoulders to knees. Squeeze glutes at the top and hold 2 seconds. Lower slowly. Keep the core braced throughout — avoid hyperextending the lower back at the top.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["lower_back_strain"]
+    },
+    {
       "exercise_id": "back-dead-bug",
       "name": "Dead Bug",
       "description": "Lie on your back with arms pointing toward the ceiling and knees bent at 90 degrees (tabletop position). Slowly lower your right arm overhead and left leg toward the floor simultaneously — keep low back pressed to the floor throughout. Return and switch sides. If the back arches, reduce the range.",
       "sets": 3,
       "reps": 10,
       "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["lower_back_strain"]
+    },
+    {
+      "exercise_id": "back-side-plank",
+      "name": "Side Plank",
+      "description": "Lie on your side and prop yourself up on your elbow and feet (or knees for a regression). Lift your hips to form a straight line from head to feet. Brace the core and hold without letting the hips sag. Progress from knees to feet, then add small hip dips for advanced loading.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 20,
       "phase": "3_return_to_sport",
       "injury_types": ["lower_back_strain"]
     },
@@ -204,6 +404,16 @@
       "injury_types": ["shin_splints"]
     },
     {
+      "exercise_id": "shin-tibialis-anterior-stretch",
+      "name": "Tibialis Anterior Stretch",
+      "description": "Sit in a chair or kneel. Point your toes and press the top of your foot gently down toward the floor. Hold 20-30 seconds. You should feel a stretch along the front of the shin. This relieves tension in the tibialis anterior without stressing the bone. Alternate sides even if only one shin is affected.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 30,
+      "phase": "1_pain_control",
+      "injury_types": ["shin_splints"]
+    },
+    {
       "exercise_id": "shin-calf-raise",
       "name": "Calf Raise",
       "description": "Stand with feet hip-width apart on a flat surface (progress to a step edge). Rise onto your toes slowly over 2 seconds, hold at the top for 1 second, then lower slowly over 3 seconds. Keep movements controlled. When pain-free on flat ground, progress to single-leg on a step with a slow eccentric lower.",
@@ -214,12 +424,32 @@
       "injury_types": ["shin_splints"]
     },
     {
+      "exercise_id": "shin-toe-tap",
+      "name": "Seated Toe Tap",
+      "description": "Sit in a chair with feet flat. Repeatedly tap your toes up and down (dorsiflexion and plantarflexion) quickly for 30 seconds. Then rest 30 seconds. This pumps blood through the lower leg and strengthens the tibialis anterior without impact. Perform away from activities to avoid overloading healing bone.",
+      "sets": 3,
+      "reps": null,
+      "duration_sec": 30,
+      "phase": "2_rom_strength",
+      "injury_types": ["shin_splints"]
+    },
+    {
       "exercise_id": "shin-run-walk-progression",
       "name": "Run-Walk Progression",
       "description": "Begin with a 1:1 ratio: walk 1 minute, jog 1 minute, repeat for 20 minutes. Pain must remain at 0-2/10 throughout and return to 0 within 24 hours. Progress by increasing jog interval by 1 minute every 3 sessions if pain-free. Stop immediately if pain exceeds 3/10.",
       "sets": null,
       "reps": null,
       "duration_sec": 1200,
+      "phase": "3_return_to_sport",
+      "injury_types": ["shin_splints"]
+    },
+    {
+      "exercise_id": "shin-single-leg-calf-raise",
+      "name": "Single-Leg Eccentric Calf Raise",
+      "description": "Stand on the injured leg on a step edge, heel hanging off. Rise onto tiptoe using both legs, then slowly lower on the injured leg alone over 4 seconds below the step edge. Use the uninjured leg to return to the top. This eccentric load strengthens the soleus and reduces bone stress. Only begin when walking and jogging are pain-free.",
+      "sets": 3,
+      "reps": 12,
+      "duration_sec": null,
       "phase": "3_return_to_sport",
       "injury_types": ["shin_splints"]
     },
@@ -235,6 +465,16 @@
       "injury_types": ["wrist_sprain"]
     },
     {
+      "exercise_id": "wrist-ice-elevation",
+      "name": "Ice and Elevation",
+      "description": "Elevate the hand above the level of your heart (rest it on a pillow while sitting or lying). Apply a cloth-wrapped ice pack to the wrist for 15 minutes. Rest at least 45 minutes before reapplying. Consistent elevation and icing in the first 48 hours significantly reduces swelling and pain.",
+      "sets": null,
+      "reps": null,
+      "duration_sec": 900,
+      "phase": "1_pain_control",
+      "injury_types": ["wrist_sprain"]
+    },
+    {
       "exercise_id": "wrist-flexion-extension",
       "name": "Wrist Flexion and Extension",
       "description": "Rest your forearm on a table with hand hanging off the edge, palm down. Use the other hand lightly for guidance. Bend the wrist up (extension) and down (flexion) through the full comfortable range. Then flip palm up and repeat. Slow and controlled — 3 seconds each direction.",
@@ -245,9 +485,29 @@
       "injury_types": ["wrist_sprain"]
     },
     {
+      "exercise_id": "wrist-radial-ulnar-deviation",
+      "name": "Radial and Ulnar Deviation",
+      "description": "Rest forearm on a table, thumb pointing up (neutral grip). Move the wrist toward the thumb side (radial deviation), then toward the pinky side (ulnar deviation). Stay in pain-free range. Slow, controlled movement — 3 seconds each direction. This restores full side-to-side wrist motion.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["wrist_sprain"]
+    },
+    {
       "exercise_id": "wrist-grip-strengthening",
       "name": "Grip Strengthening",
       "description": "Squeeze a soft stress ball or rolled-up sock in your hand. Hold the squeeze for 5 seconds, then fully release and spread fingers wide. Progress to a firmer ball as grip strength returns. Build up to sport-specific grip demands (racket, bat, ball) in the final days of this phase.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["wrist_sprain"]
+    },
+    {
+      "exercise_id": "wrist-forearm-pronation-supination",
+      "name": "Forearm Pronation and Supination",
+      "description": "Hold a light hammer or water bottle at the handle end for leverage. Rotate the forearm so the palm faces down (pronation), then up (supination). Move slowly and through full range. Progress the weight as rotation becomes pain-free. This reloads the wrist in the rotational plane needed for throwing, batting, and racket sports.",
       "sets": 3,
       "reps": 15,
       "duration_sec": null,
@@ -266,9 +526,29 @@
       "injury_types": ["finger_sprain"]
     },
     {
+      "exercise_id": "finger-gentle-extension-stretch",
+      "name": "Gentle Finger Extension Stretch",
+      "description": "Place the palm of the injured hand flat on a table. Using the other hand, gently press the fingertips upward into mild extension — only into the pain-free range. Hold 10 seconds, release. Do not force range. This prevents the finger from setting in a flexed posture while the ligament heals.",
+      "sets": 3,
+      "reps": 8,
+      "duration_sec": null,
+      "phase": "1_pain_control",
+      "injury_types": ["finger_sprain"]
+    },
+    {
       "exercise_id": "finger-tendon-glides",
       "name": "Tendon Glide Exercises",
       "description": "Perform this sequence with the injured finger, 10 reps each position: (1) Start straight. (2) Bend at the big knuckle only — tabletop position. (3) Curl all joints into a hook. (4) Make a full fist. Hold each position 3 seconds. Move slowly and stop if sharp pain occurs. This maintains tendon gliding and prevents stiffness.",
+      "sets": 3,
+      "reps": 10,
+      "duration_sec": null,
+      "phase": "2_rom_strength",
+      "injury_types": ["finger_sprain"]
+    },
+    {
+      "exercise_id": "finger-place-and-hold",
+      "name": "Place and Hold (Active Extension)",
+      "description": "Passively straighten the injured finger with the other hand to full extension. Then actively hold that position without help for 5 seconds before allowing it to return. This retrains the extensor tendon to actively maintain the range you've regained passively. Progress by holding longer and adding gentle resistance.",
       "sets": 3,
       "reps": 10,
       "duration_sec": null,
@@ -284,6 +564,17 @@
       "duration_sec": null,
       "phase": "3_return_to_sport",
       "injury_types": ["finger_sprain"]
+    },
+    {
+      "exercise_id": "finger-sport-grip-progression",
+      "name": "Sport-Specific Grip Progression",
+      "description": "Simulate the grip demands of your sport with increasing resistance: start by catching and throwing a small soft ball gently, then progress to a standard ball, then to full sport-specific movements (dribbling, catching, blocking). Pain must stay at 0-2/10. This is the final functional bridge back to practice.",
+      "sets": 3,
+      "reps": 15,
+      "duration_sec": null,
+      "phase": "3_return_to_sport",
+      "injury_types": ["finger_sprain"]
     }
+
   ]
 }
