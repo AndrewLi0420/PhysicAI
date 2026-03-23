@@ -86,9 +86,19 @@ const GENERATE_PLAN_TOOL: Anthropic.Tool = {
   },
 };
 
+// ─── CORS ─────────────────────────────────────────────────────────────────────
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
 // ─── Handler ──────────────────────────────────────────────────────────────────
 
 Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: CORS_HEADERS });
+  }
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
 
   let body: {
@@ -134,7 +144,7 @@ Deno.serve(async (req) => {
     const err = await insertRes.text();
     console.error("Plan insert failed:", err);
     return new Response(JSON.stringify({ error: "Failed to create plan" }), {
-      status: 500, headers: { "Content-Type": "application/json" },
+      status: 500, headers: { "Content-Type": "application/json", ...CORS_HEADERS },
     });
   }
 
@@ -174,7 +184,7 @@ Deno.serve(async (req) => {
     console.error("Claude call failed:", err);
     return new Response(
       JSON.stringify({ error: "Plan generation failed", token, retry: true }),
-      { status: 503, headers: { "Content-Type": "application/json" } }
+      { status: 503, headers: { "Content-Type": "application/json", ...CORS_HEADERS } }
     );
   }
 
@@ -188,7 +198,7 @@ Deno.serve(async (req) => {
     console.error("Invalid exercise IDs:", invalidIds);
     return new Response(
       JSON.stringify({ error: "Invalid exercise IDs", invalid: invalidIds }),
-      { status: 422, headers: { "Content-Type": "application/json" } }
+      { status: 422, headers: { "Content-Type": "application/json", ...CORS_HEADERS } }
     );
   }
 
@@ -220,7 +230,7 @@ Deno.serve(async (req) => {
       status,
       plan: status === "approved" ? planInput : null,
     }),
-    { status: 200, headers: { "Content-Type": "application/json" } }
+    { status: 200, headers: { "Content-Type": "application/json", ...CORS_HEADERS } }
   );
 });
 
