@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import type { Plan, RecoveryPlan, PlanExercise } from "@/types";
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 // ─── Exercise name lookup ──────────────────────────────────────────────────────
 
@@ -137,22 +135,14 @@ export default function PlanPage() {
 
     (async () => {
       try {
-        const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/plans?token=eq.${token}&select=*`,
-          {
-            headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            },
-          }
-        );
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const rows: Plan[] = await res.json();
-        if (!rows.length) {
+        const res = await fetch(`/api/plan?token=${token}`);
+        if (res.status === 404) {
           setError("Plan not found.");
           return;
         }
-        setPlan(rows[0]);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const row: Plan = await res.json();
+        setPlan(row);
       } catch (err) {
         console.error(err);
         setError("Failed to load plan.");
