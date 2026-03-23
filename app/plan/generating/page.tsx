@@ -35,7 +35,7 @@ function GeneratingContent() {
     if (!token || called.current) return;
     called.current = true;
 
-    const raw = sessionStorage.getItem(`assessment_${token}`);
+    const raw = sessionStorage.getItem(`plan_flags_${token}`);
     if (!raw) {
       setError("Assessment data not found. Please start over.");
       return;
@@ -67,7 +67,7 @@ function GeneratingContent() {
           throw new Error(`HTTP ${res.status}`);
         }
 
-        sessionStorage.removeItem(`assessment_${token}`);
+        sessionStorage.removeItem(`plan_flags_${token}`);
         router.replace(`/plan/${token}`);
       } catch (err) {
         console.error("generate-plan error:", err);
