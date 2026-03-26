@@ -28,7 +28,7 @@ function exerciseLabel(id: string): string {
 function PendingReviewScreen() {
   const router = useRouter();
   return (
-    <main className="flex flex-col min-h-svh px-8 bg-background max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh px-8 bg-background max-w-xl mx-auto w-full">
       <div className="flex flex-col gap-6 pt-24 pb-10">
         <div>
           <h1 className="font-heading text-xl font-bold text-foreground mb-2">Plan under review</h1>
@@ -72,7 +72,7 @@ function PlanScreen({ plan }: { plan: RecoveryPlan & { currentDay: number } }) {
   const phase = plan.phases?.[0];
 
   return (
-    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh bg-background max-w-xl mx-auto w-full">
       {/* Header */}
       <div className="px-5 pt-12 pb-6 bg-ds-accent">
         <p className="text-xs font-bold text-white/60 uppercase tracking-widest mb-1">PhysicAI</p>
@@ -163,7 +163,7 @@ export default function PlanPage() {
 
   if (loading) {
     return (
-      <main className="flex min-h-svh items-center justify-center bg-background max-w-sm mx-auto w-full">
+      <main className="flex min-h-svh items-center justify-center bg-background max-w-xl mx-auto w-full">
         <div className="relative w-10 h-10">
           <div className="absolute inset-0 rounded-full border-4 border-ds-accent-lt" />
           <div className="absolute inset-0 rounded-full border-4 border-ds-accent border-t-transparent animate-spin" />
@@ -174,7 +174,7 @@ export default function PlanPage() {
 
   if (error || !plan) {
     return (
-      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-background max-w-sm mx-auto w-full">
+      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-background max-w-xl mx-auto w-full">
         <p className="text-base text-red-600 font-semibold">{error ?? "Something went wrong."}</p>
         <button
           onClick={() => router.replace("/")}

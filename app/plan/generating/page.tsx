@@ -82,7 +82,7 @@ function GeneratingContent() {
 
   if (error) {
     return (
-      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-6 bg-background max-w-sm mx-auto w-full">
+      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-6 bg-background max-w-xl mx-auto w-full">
         <p className="text-base text-red-600 font-semibold text-center">{error}</p>
         <button
           onClick={() => router.replace("/")}
@@ -95,7 +95,7 @@ function GeneratingContent() {
   }
 
   return (
-    <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-8 bg-background max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-8 bg-background max-w-xl mx-auto w-full">
       {/* Spinner */}
       <div className="relative w-16 h-16">
         <div className="absolute inset-0 rounded-full border-4 border-ds-accent-lt" />

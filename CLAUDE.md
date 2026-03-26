@@ -7,7 +7,7 @@ Key rules:
 - Accent color: #C2440A (burnt sienna) — not blue, not green
 - Background: #FAF9F7 (warm off-white) — not pure white
 - Cards use --surface (#F2EFE9) with --border (#E0D9CE), border-radius 12px
-- Max-width: max-w-sm on all screens
+- Max-width: max-w-xl on all screens
 
 ## gstack
 - Use the /browse skill from gstack for all web browsing

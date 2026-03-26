@@ -98,7 +98,7 @@ export default function AssessmentFlow({ injuryType }: Props) {
 
   if (loading || !tree || !traversal) {
     return (
-      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 bg-background max-w-sm mx-auto w-full">
+      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 bg-background max-w-xl mx-auto w-full">
         <div className="w-8 h-8 rounded-full border-2 border-ds-accent border-t-transparent animate-spin" />
         <p className="text-sm text-ds-text-3">Loading assessment…</p>
       </main>
@@ -109,7 +109,7 @@ export default function AssessmentFlow({ injuryType }: Props) {
 
   if (error) {
     return (
-      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 text-center bg-background max-w-sm mx-auto w-full">
+      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 text-center bg-background max-w-xl mx-auto w-full">
         <p className="text-ds-text-2 text-sm">Something went wrong loading the assessment.</p>
         <button onClick={() => router.push("/")} className="text-ds-accent text-sm font-medium">
           Go back
@@ -147,7 +147,7 @@ export default function AssessmentFlow({ injuryType }: Props) {
   const questionNumber = traversal.history.length + 1;
 
   return (
-    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh bg-background max-w-xl mx-auto w-full">
 
       {/* Nav bar */}
       <div className="flex items-center gap-3 px-4 pt-10 pb-3">

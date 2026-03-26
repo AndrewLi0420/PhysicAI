@@ -36,7 +36,7 @@ export default function InjuryIntake() {
   }
 
   return (
-    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh bg-background max-w-xl mx-auto w-full">
 
       {/* Header */}
       <div className="px-6 pt-12 pb-4">

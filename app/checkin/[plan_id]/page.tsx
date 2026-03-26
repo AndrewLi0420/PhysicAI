@@ -377,7 +377,7 @@ export default function CheckInPage() {
 
   if (!currentDay && !loadError) {
     return (
-      <main className="flex min-h-svh items-center justify-center bg-background max-w-sm mx-auto w-full">
+      <main className="flex min-h-svh items-center justify-center bg-background max-w-xl mx-auto w-full">
         <div className="relative w-10 h-10">
           <div className="absolute inset-0 rounded-full border-4 border-ds-accent-lt" />
           <div className="absolute inset-0 rounded-full border-4 border-ds-accent border-t-transparent animate-spin" />
@@ -388,7 +388,7 @@ export default function CheckInPage() {
 
   if (loadError) {
     return (
-      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-background max-w-sm mx-auto w-full">
+      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-background max-w-xl mx-auto w-full">
         <p className="text-base text-red-600 font-semibold">{loadError}</p>
       </main>
     );
@@ -397,7 +397,7 @@ export default function CheckInPage() {
   // ─── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh bg-background max-w-xl mx-auto w-full">
       {/* Header */}
       <div className="px-5 pt-12 pb-5 border-b border-border">
         <p className="text-xs font-semibold text-ds-accent uppercase tracking-widest mb-0.5">PhysicAI</p>
