@@ -167,7 +167,7 @@ export default function AssessmentFlow({ injuryType }: Props) {
 
       {/* Progress bar */}
       <div className="px-6 pb-4">
-        <Progress value={progress} className="h-1.5 rounded-full" />
+        <Progress value={progress} className="h-2 rounded-full" />
       </div>
 
       {/* Question — key forces re-mount + animation on each new question */}
