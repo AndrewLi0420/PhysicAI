@@ -81,7 +81,7 @@ export default function AssessmentFlow({ injuryType }: Props) {
       `plan_flags_${token}`,
       JSON.stringify({ ...traversal.collectedFlags, outcome })
     );
-    router.push(`/plan/generating?token=${token}`);
+    router.push(`/plan/generating?token=${token}&injury=${encodeURIComponent(injuryType)}`);
   }, [tree, traversal, router]);
 
   // ── Back navigation ───────────────────────────────────────────────────────

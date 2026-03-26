@@ -18,6 +18,10 @@ function GeneratingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  const injuryParam = searchParams.get("injury");
+  const injuryLabel = injuryParam
+    ? injuryParam.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : null;
   const [stepIndex, setStepIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const called = useRef(false);
@@ -106,6 +110,9 @@ function GeneratingContent() {
         >
           {STEPS[stepIndex]}
         </p>
+        {injuryLabel && (
+          <p className="text-xs text-gray-400 mt-1">{injuryLabel}</p>
+        )}
         <p className="text-sm text-gray-400 mt-2">
           This usually takes about 5 seconds
         </p>
