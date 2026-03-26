@@ -29,11 +29,11 @@ function PainScoreStep({
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <p className="text-xs font-semibold text-blue-500 uppercase tracking-widest mb-2">
+        <p className="text-xs font-semibold text-ds-accent uppercase tracking-widest mb-2">
           Step 1 of 3
         </p>
-        <h2 className="text-2xl font-bold text-gray-900">How's your pain today?</h2>
-        <p className="text-sm text-gray-500 mt-1">1 = no pain, 10 = worst imaginable</p>
+        <h2 className="text-2xl font-bold text-foreground">How's your pain today?</h2>
+        <p className="text-sm text-ds-text-3 mt-1">1 = no pain, 10 = worst imaginable</p>
       </div>
 
       <div className="grid grid-cols-5 gap-3">
@@ -42,15 +42,15 @@ function PainScoreStep({
           const color =
             n <= 3
               ? selected
-                ? "bg-green-500 text-white border-green-500"
-                : "border-green-200 text-green-700 hover:bg-green-50"
+                ? "bg-ds-success text-white border-ds-success"
+                : "border-ds-success/30 text-ds-success hover:bg-ds-success-lt"
               : n <= 6
               ? selected
-                ? "bg-yellow-400 text-white border-yellow-400"
-                : "border-yellow-200 text-yellow-700 hover:bg-yellow-50"
+                ? "bg-ds-warning text-white border-ds-warning"
+                : "border-ds-warning/30 text-ds-warning hover:bg-ds-warning-lt"
               : selected
-              ? "bg-red-500 text-white border-red-500"
-              : "border-red-200 text-red-700 hover:bg-red-50";
+              ? "bg-ds-error text-white border-ds-error"
+              : "border-ds-error/30 text-ds-error hover:bg-ds-error-lt";
 
           return (
             <button
@@ -67,7 +67,7 @@ function PainScoreStep({
       <button
         onClick={onNext}
         disabled={value === null}
-        className="w-full py-4 rounded-2xl bg-blue-500 text-white font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
+        className="w-full py-4 rounded-xl bg-ds-accent text-white font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
       >
         Next
       </button>
@@ -95,10 +95,10 @@ function YesNoStep({
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <p className="text-xs font-semibold text-blue-500 uppercase tracking-widest mb-2">
+        <p className="text-xs font-semibold text-ds-accent uppercase tracking-widest mb-2">
           Step {step} of {total}
         </p>
-        <h2 className="text-2xl font-bold text-gray-900">{question}</h2>
+        <h2 className="text-2xl font-bold text-foreground">{question}</h2>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -113,8 +113,8 @@ function YesNoStep({
               onClick={() => onChange(val)}
               className={`w-full py-5 rounded-2xl border-2 font-semibold text-lg transition-all ${
                 selected
-                  ? "bg-blue-500 border-blue-500 text-white"
-                  : "border-gray-200 text-gray-700 hover:border-blue-300 hover:bg-blue-50"
+                  ? "bg-ds-accent border-ds-accent text-white"
+                  : "border-border text-ds-text-2 hover:border-ds-accent/40 hover:bg-ds-accent-lt"
               }`}
             >
               {label}
@@ -126,14 +126,14 @@ function YesNoStep({
       <div className="flex gap-3">
         <button
           onClick={onBack}
-          className="flex-1 py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-semibold text-base"
+          className="flex-1 py-4 rounded-xl border-[1.5px] border-border text-ds-text-2 font-semibold text-base"
         >
           Back
         </button>
         <button
           onClick={onNext}
           disabled={value === null}
-          className="flex-[2] py-4 rounded-2xl bg-blue-500 text-white font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
+          className="flex-[2] py-4 rounded-xl bg-ds-accent text-white font-semibold text-base disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
         >
           Next
         </button>
@@ -160,26 +160,26 @@ function SubmitStep({
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <p className="text-xs font-semibold text-blue-500 uppercase tracking-widest mb-2">
+        <p className="text-xs font-semibold text-ds-accent uppercase tracking-widest mb-2">
           Review
         </p>
-        <h2 className="text-2xl font-bold text-gray-900">Looks good?</h2>
+        <h2 className="text-2xl font-bold text-foreground">Looks good?</h2>
       </div>
 
-      <div className="flex flex-col gap-3 rounded-2xl bg-gray-50 border border-gray-100 px-5 py-4">
+      <div className="flex flex-col gap-3 rounded-xl bg-card border border-border px-5 py-4">
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500">Pain score</span>
-          <span className="font-bold text-gray-900">{painScore} / 10</span>
+          <span className="text-sm text-ds-text-3">Pain score</span>
+          <span className="font-bold text-foreground">{painScore} / 10</span>
         </div>
-        <div className="h-px bg-gray-200" />
+        <div className="h-px bg-border" />
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500">Swelling</span>
-          <span className="font-bold text-gray-900">{swelling ? "Yes" : "No"}</span>
+          <span className="text-sm text-ds-text-3">Swelling</span>
+          <span className="font-bold text-foreground">{swelling ? "Yes" : "No"}</span>
         </div>
-        <div className="h-px bg-gray-200" />
+        <div className="h-px bg-border" />
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500">Weight bearing</span>
-          <span className="font-bold text-gray-900">{weightBearing ? "Yes" : "No"}</span>
+          <span className="text-sm text-ds-text-3">Weight bearing</span>
+          <span className="font-bold text-foreground">{weightBearing ? "Yes" : "No"}</span>
         </div>
       </div>
 
@@ -187,14 +187,14 @@ function SubmitStep({
         <button
           onClick={onBack}
           disabled={submitting}
-          className="flex-1 py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-semibold text-base disabled:opacity-40"
+          className="flex-1 py-4 rounded-xl border-[1.5px] border-border text-ds-text-2 font-semibold text-base disabled:opacity-40"
         >
           Back
         </button>
         <button
           onClick={onSubmit}
           disabled={submitting}
-          className="flex-[2] py-4 rounded-2xl bg-blue-500 text-white font-semibold text-base disabled:opacity-40 transition-opacity flex items-center justify-center gap-2"
+          className="flex-[2] py-4 rounded-xl bg-ds-accent text-white font-semibold text-base disabled:opacity-40 transition-opacity flex items-center justify-center gap-2"
         >
           {submitting ? (
             <>
@@ -214,11 +214,11 @@ function SubmitStep({
 
 const outcomeConfig = {
   advance: {
-    bg: "bg-green-50",
-    iconBg: "bg-green-100",
-    iconColor: "text-green-600",
-    badgeBg: "bg-green-100",
-    badgeText: "text-green-700",
+    bg: "bg-ds-success-lt",
+    iconBg: "bg-ds-success-lt",
+    iconColor: "text-ds-success",
+    badgeBg: "bg-ds-success-lt",
+    badgeText: "text-ds-success",
     badge: "Advancing",
     heading: "Great progress!",
     body: "Moving to next phase",
@@ -229,11 +229,11 @@ const outcomeConfig = {
     ),
   },
   hold: {
-    bg: "bg-yellow-50",
-    iconBg: "bg-yellow-100",
-    iconColor: "text-yellow-600",
-    badgeBg: "bg-yellow-100",
-    badgeText: "text-yellow-700",
+    bg: "bg-ds-warning-lt",
+    iconBg: "bg-ds-warning-lt",
+    iconColor: "text-ds-warning",
+    badgeBg: "bg-ds-warning-lt",
+    badgeText: "text-ds-warning",
     badge: "Hold steady",
     heading: "Stay at today's level",
     body: "You've got this — keep going at the same pace",
@@ -244,11 +244,11 @@ const outcomeConfig = {
     ),
   },
   escalate: {
-    bg: "bg-red-50",
-    iconBg: "bg-red-100",
-    iconColor: "text-red-600",
-    badgeBg: "bg-red-100",
-    badgeText: "text-red-700",
+    bg: "bg-ds-error-lt",
+    iconBg: "bg-ds-error-lt",
+    iconColor: "text-ds-error",
+    badgeBg: "bg-ds-error-lt",
+    badgeText: "text-ds-error",
     badge: "Rest today",
     heading: "Pain is high",
     body: "Rest today and consider seeing a doctor",
@@ -271,8 +271,8 @@ function OutcomeScreen({ outcome }: { outcome: CheckInOutcome }) {
         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${cfg.badgeBg} ${cfg.badgeText} mb-3`}>
           {cfg.badge}
         </span>
-        <h2 className="text-2xl font-bold text-gray-900 mb-1">{cfg.heading}</h2>
-        <p className="text-base text-gray-600">{cfg.body}</p>
+        <h2 className="font-heading text-2xl font-bold text-foreground mb-1">{cfg.heading}</h2>
+        <p className="text-base text-ds-text-2">{cfg.body}</p>
       </div>
     </div>
   );
@@ -377,10 +377,10 @@ export default function CheckInPage() {
 
   if (!currentDay && !loadError) {
     return (
-      <main className="flex min-h-svh items-center justify-center bg-white">
+      <main className="flex min-h-svh items-center justify-center bg-background max-w-sm mx-auto w-full">
         <div className="relative w-10 h-10">
-          <div className="absolute inset-0 rounded-full border-4 border-blue-100" />
-          <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
+          <div className="absolute inset-0 rounded-full border-4 border-ds-accent-lt" />
+          <div className="absolute inset-0 rounded-full border-4 border-ds-accent border-t-transparent animate-spin" />
         </div>
       </main>
     );
@@ -388,7 +388,7 @@ export default function CheckInPage() {
 
   if (loadError) {
     return (
-      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-white">
+      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-background max-w-sm mx-auto w-full">
         <p className="text-base text-red-600 font-semibold">{loadError}</p>
       </main>
     );
@@ -397,11 +397,11 @@ export default function CheckInPage() {
   // ─── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <main className="flex flex-col min-h-svh bg-white">
+    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
       {/* Header */}
-      <div className="px-5 pt-12 pb-5 border-b border-gray-100">
-        <p className="text-xs font-semibold text-blue-500 uppercase tracking-widest mb-0.5">PhysicAI</p>
-        <h1 className="text-lg font-bold text-gray-900">
+      <div className="px-5 pt-12 pb-5 border-b border-border">
+        <p className="text-xs font-semibold text-ds-accent uppercase tracking-widest mb-0.5">PhysicAI</p>
+        <h1 className="font-heading text-lg font-bold text-foreground">
           Day {currentDay} Check-in
         </h1>
       </div>
@@ -458,7 +458,7 @@ export default function CheckInPage() {
         {step === "done" && outcome && (
           <div className="flex flex-col gap-6">
             <OutcomeScreen outcome={outcome} />
-            <p className="text-xs text-gray-400 text-center leading-relaxed">
+            <p className="text-xs text-ds-text-3 text-center leading-relaxed">
               Recovery guidance only — not a substitute for medical advice.
             </p>
           </div>

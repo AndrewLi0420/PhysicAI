@@ -31,11 +31,11 @@ export default function QuestionCard({
   return (
     // key is set by the parent to trigger re-mount animation on question change
     <div className="animate-in fade-in slide-in-from-right-4 duration-200 flex flex-col gap-4">
-      <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
+      <p className="text-xs font-bold text-ds-text-3 uppercase tracking-widest">
         Question {questionNumber}
       </p>
 
-      <h2 className="text-xl font-bold text-gray-900 leading-snug">
+      <h2 className="font-heading text-xl font-bold text-foreground leading-snug">
         {prompt}
       </h2>
 
@@ -48,11 +48,11 @@ export default function QuestionCard({
               onClick={() => handleTap(i)}
               disabled={pressedIndex !== null}
               className={[
-                "w-full text-left px-5 py-4 rounded-2xl border-2 font-medium text-sm leading-snug",
+                "w-full text-left px-5 py-4 rounded-xl border-[1.5px] font-medium text-sm leading-snug",
                 "transition-all duration-100 active:scale-[0.98]",
                 isPressed
-                  ? "border-blue-500 bg-blue-500 text-white scale-[0.98]"
-                  : "border-gray-100 bg-gray-50 text-gray-800 hover:border-blue-200 hover:bg-blue-50",
+                  ? "border-ds-accent bg-ds-accent text-white scale-[0.98]"
+                  : "border-border bg-card text-foreground hover:border-ds-accent/60 hover:bg-ds-accent-lt",
               ].join(" ")}
             >
               {option.label}

@@ -28,22 +28,22 @@ function exerciseLabel(id: string): string {
 function PendingReviewScreen() {
   const router = useRouter();
   return (
-    <main className="flex flex-col min-h-svh px-8 bg-white max-w-sm mx-auto w-full">
-      <div className="flex flex-col gap-6 max-w-xs mx-auto w-full pt-24 pb-10">
+    <main className="flex flex-col min-h-svh px-8 bg-background max-w-sm mx-auto w-full">
+      <div className="flex flex-col gap-6 pt-24 pb-10">
         <div>
-          <h1 className="text-xl font-bold text-gray-900 mb-2">Plan under review</h1>
-          <p className="text-sm text-gray-500 leading-relaxed">
-            A physical therapist is reviewing your recovery plan. You'll receive an email when it's ready — usually within a few hours.
+          <h1 className="font-heading text-xl font-bold text-foreground mb-2">Plan under review</h1>
+          <p className="text-sm text-ds-text-2 leading-relaxed">
+            A physical therapist is reviewing your recovery plan. You&apos;ll receive an email when it&apos;s ready — usually within a few hours.
           </p>
         </div>
-        <div className="bg-blue-50 rounded-xl px-5 py-4">
-          <p className="text-xs text-blue-700 leading-relaxed font-medium">
+        <div className="bg-ds-accent-lt border border-ds-accent/20 rounded-xl px-5 py-4">
+          <p className="text-xs text-ds-accent-dk leading-relaxed font-medium">
             While you wait: rest, ice 20 min on/off, and elevate if possible.
           </p>
         </div>
         <button
           onClick={() => router.replace("/")}
-          className="text-sm text-gray-400 hover:text-gray-600 underline underline-offset-2 transition-colors text-left"
+          className="text-sm text-ds-text-3 hover:text-ds-text-2 underline underline-offset-2 transition-colors text-left"
         >
           ← Start a new assessment
         </button>
@@ -56,9 +56,14 @@ function ExerciseCard({ ex }: { ex: PlanExercise }) {
   const label = exerciseLabel(ex.exercise_id);
   const detail = formatExercise(ex);
   return (
-    <div className="rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4">
-      <p className="font-semibold text-gray-900 text-sm">{label}</p>
-      {detail && <p className="text-xs text-gray-500 mt-0.5">{detail}</p>}
+    <div className="rounded-xl border border-border bg-card px-5 py-4 flex items-center gap-4">
+      <span className="font-data text-xl font-semibold text-ds-accent tabular-nums min-w-[20px]">
+        {detail.split("×")[0]}
+      </span>
+      <div>
+        <p className="font-semibold text-foreground text-sm">{label}</p>
+        {detail && <p className="text-xs text-ds-text-3 mt-0.5">{detail}</p>}
+      </div>
     </div>
   );
 }
@@ -67,32 +72,32 @@ function PlanScreen({ plan }: { plan: RecoveryPlan & { currentDay: number } }) {
   const phase = plan.phases?.[0];
 
   return (
-    <main className="flex flex-col min-h-svh bg-white">
+    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
       {/* Header */}
-      <div className="px-5 pt-12 pb-6 bg-blue-500">
-        <p className="text-xs font-semibold text-blue-200 uppercase tracking-widest mb-1">PhysicAI</p>
-        <h1 className="text-2xl font-bold text-white mb-1">{plan.injury_subtype}</h1>
-        <p className="text-sm text-blue-100">{plan.severity} · {plan.timeline_days[0]}–{plan.timeline_days[1]} days recovery</p>
+      <div className="px-5 pt-12 pb-6 bg-ds-accent">
+        <p className="text-xs font-bold text-white/60 uppercase tracking-widest mb-1">PhysicAI</p>
+        <h1 className="font-heading text-2xl font-bold text-white mb-1">{plan.injury_subtype}</h1>
+        <p className="text-sm text-white/75">{plan.severity} · {plan.timeline_days[0]}–{plan.timeline_days[1]} days recovery</p>
       </div>
 
       <div className="flex flex-col gap-6 px-5 py-6">
         {/* Current phase */}
         {phase && (
           <section>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">{phase.label}</p>
-            <div className="rounded-2xl border border-gray-100 px-5 py-4">
-              <p className="font-semibold text-gray-900 text-sm mb-1">{phase.name}</p>
-              <p className="text-sm text-gray-500 leading-relaxed">{phase.description}</p>
+            <p className="text-xs font-bold text-ds-text-3 uppercase tracking-widest mb-2">{phase.label}</p>
+            <div className="rounded-xl border border-border bg-card px-5 py-4">
+              <p className="font-semibold text-foreground text-sm mb-1">{phase.name}</p>
+              <p className="text-sm text-ds-text-2 leading-relaxed">{phase.description}</p>
             </div>
           </section>
         )}
 
         {/* Today's exercises */}
         <section>
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
+          <p className="text-xs font-bold text-ds-text-3 uppercase tracking-widest mb-3">
             Day {plan.currentDay} Exercises
           </p>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             {plan.todays_exercises.map((ex) => (
               <ExerciseCard key={ex.exercise_id} ex={ex} />
             ))}
@@ -102,12 +107,12 @@ function PlanScreen({ plan }: { plan: RecoveryPlan & { currentDay: number } }) {
         {/* Red flags */}
         {plan.red_flags?.length > 0 && (
           <section>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Watch for</p>
-            <div className="rounded-2xl bg-red-50 border border-red-100 px-5 py-4">
+            <p className="text-xs font-bold text-ds-text-3 uppercase tracking-widest mb-2">Watch for</p>
+            <div className="rounded-xl bg-ds-error-lt border border-ds-error/20 px-5 py-4">
               <ul className="flex flex-col gap-1.5">
                 {plan.red_flags.map((flag, i) => (
-                  <li key={i} className="text-sm text-red-700 flex gap-2">
-                    <span className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-red-400" />
+                  <li key={i} className="text-sm text-ds-error flex gap-2">
+                    <span className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-ds-error" />
                     {flag}
                   </li>
                 ))}
@@ -117,7 +122,7 @@ function PlanScreen({ plan }: { plan: RecoveryPlan & { currentDay: number } }) {
         )}
 
         {/* Disclaimer */}
-        <p className="text-xs text-gray-400 text-center leading-relaxed">
+        <p className="text-xs text-ds-text-3 text-center leading-relaxed">
           Recovery guidance only — not a substitute for medical advice. See a doctor if symptoms worsen.
         </p>
       </div>
@@ -158,10 +163,10 @@ export default function PlanPage() {
 
   if (loading) {
     return (
-      <main className="flex min-h-svh items-center justify-center bg-white">
+      <main className="flex min-h-svh items-center justify-center bg-background max-w-sm mx-auto w-full">
         <div className="relative w-10 h-10">
-          <div className="absolute inset-0 rounded-full border-4 border-blue-100" />
-          <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
+          <div className="absolute inset-0 rounded-full border-4 border-ds-accent-lt" />
+          <div className="absolute inset-0 rounded-full border-4 border-ds-accent border-t-transparent animate-spin" />
         </div>
       </main>
     );
@@ -169,11 +174,11 @@ export default function PlanPage() {
 
   if (error || !plan) {
     return (
-      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-white">
+      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-4 bg-background max-w-sm mx-auto w-full">
         <p className="text-base text-red-600 font-semibold">{error ?? "Something went wrong."}</p>
         <button
           onClick={() => router.replace("/")}
-          className="px-6 py-3 rounded-xl bg-gray-100 text-gray-800 font-semibold text-sm"
+          className="px-6 py-3 rounded-xl bg-secondary text-foreground font-semibold text-sm"
         >
           Start over
         </button>

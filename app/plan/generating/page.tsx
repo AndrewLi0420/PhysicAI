@@ -82,11 +82,11 @@ function GeneratingContent() {
 
   if (error) {
     return (
-      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-6 bg-white">
+      <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-6 bg-background max-w-sm mx-auto w-full">
         <p className="text-base text-red-600 font-semibold text-center">{error}</p>
         <button
           onClick={() => router.replace("/")}
-          className="px-6 py-3 rounded-xl bg-gray-100 text-gray-800 font-semibold text-sm"
+          className="px-6 py-3 rounded-xl bg-secondary text-foreground font-semibold text-sm"
         >
           Start over
         </button>
@@ -95,25 +95,25 @@ function GeneratingContent() {
   }
 
   return (
-    <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-8 bg-white max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-8 bg-background max-w-sm mx-auto w-full">
       {/* Spinner */}
       <div className="relative w-16 h-16">
-        <div className="absolute inset-0 rounded-full border-4 border-blue-100" />
-        <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
+        <div className="absolute inset-0 rounded-full border-4 border-ds-accent-lt" />
+        <div className="absolute inset-0 rounded-full border-4 border-ds-accent border-t-transparent animate-spin" />
       </div>
 
       {/* Loading copy */}
       <div className="text-center">
         <p
           key={stepIndex}
-          className="animate-in fade-in duration-500 text-base font-semibold text-gray-800"
+          className="animate-in fade-in duration-500 text-base font-semibold text-foreground"
         >
           {STEPS[stepIndex]}
         </p>
         {injuryLabel && (
-          <p className="text-xs text-gray-400 mt-1">{injuryLabel}</p>
+          <p className="text-xs text-ds-text-3 mt-1">{injuryLabel}</p>
         )}
-        <p className="text-sm text-gray-400 mt-2">
+        <p className="text-sm text-ds-text-3 mt-2">
           This usually takes about 5 seconds
         </p>
       </div>

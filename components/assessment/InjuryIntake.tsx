@@ -36,17 +36,17 @@ export default function InjuryIntake() {
   }
 
   return (
-    <main className="flex flex-col min-h-svh bg-white max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
 
       {/* Header */}
       <div className="px-6 pt-12 pb-4">
-        <p className="text-xs font-semibold tracking-widest text-blue-500 uppercase mb-1">
+        <p className="text-xs font-bold tracking-widest text-ds-accent uppercase mb-1">
           PhysicAI
         </p>
-        <h1 className="text-2xl font-bold text-gray-900 leading-tight">
-          Where's the injury?
+        <h1 className="font-heading text-2xl font-bold text-foreground leading-tight">
+          Where&apos;s the injury?
         </h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-ds-text-3 mt-1">
           Tap your body or choose below
         </p>
       </div>
@@ -69,19 +69,19 @@ export default function InjuryIntake() {
                 onClick={() => handleSelect(type)}
                 aria-pressed={isSelected}
                 className={[
-                  "w-full text-left px-4 py-3 rounded-xl border-2 transition-all duration-150 active:scale-[0.98]",
+                  "w-full text-left px-4 py-3 rounded-xl border-[1.5px] transition-all duration-150 active:scale-[0.98]",
                   isSelected
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-100 bg-gray-50 hover:border-gray-200",
+                    ? "border-ds-accent bg-ds-accent-lt"
+                    : "border-border bg-card hover:border-ds-accent/40 hover:bg-ds-accent-lt/50",
                 ].join(" ")}
               >
                 <span className={[
                   "block text-sm font-semibold leading-tight",
-                  isSelected ? "text-blue-700" : "text-gray-800",
+                  isSelected ? "text-ds-accent" : "text-foreground",
                 ].join(" ")}>
                   {label}
                 </span>
-                <span className="block text-xs text-gray-400 mt-0.5">
+                <span className="block text-xs text-ds-text-3 mt-0.5">
                   {region}
                 </span>
               </button>
@@ -91,11 +91,11 @@ export default function InjuryIntake() {
       </div>
 
       {/* CTA — sticky footer */}
-      <div className="px-6 pb-10 pt-4 border-t border-gray-100">
+      <div className="px-6 pb-10 pt-4 border-t border-border">
         <Button
           onClick={handleStart}
           disabled={!selected}
-          className="w-full h-14 text-base font-semibold rounded-2xl disabled:opacity-40"
+          className="w-full h-14 text-base font-semibold rounded-xl disabled:opacity-40"
         >
           {selected
             ? `Start ${INJURY_TYPES.find((i) => i.type === selected)?.label} Assessment →`
@@ -103,7 +103,7 @@ export default function InjuryIntake() {
         </Button>
 
         {/* Disclaimer */}
-        <p className="text-xs text-center text-gray-400 mt-3 leading-relaxed">
+        <p className="text-xs text-center text-ds-text-3 mt-3 leading-relaxed">
           Recovery guidance only — not a substitute for medical advice.
           <br />
           Seek care immediately for severe pain or deformity.

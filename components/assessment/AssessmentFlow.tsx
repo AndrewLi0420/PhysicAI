@@ -98,9 +98,9 @@ export default function AssessmentFlow({ injuryType }: Props) {
 
   if (loading || !tree || !traversal) {
     return (
-      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6">
-        <div className="w-8 h-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
-        <p className="text-sm text-gray-400">Loading assessment…</p>
+      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 bg-background max-w-sm mx-auto w-full">
+        <div className="w-8 h-8 rounded-full border-2 border-ds-accent border-t-transparent animate-spin" />
+        <p className="text-sm text-ds-text-3">Loading assessment…</p>
       </main>
     );
   }
@@ -109,9 +109,9 @@ export default function AssessmentFlow({ injuryType }: Props) {
 
   if (error) {
     return (
-      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 text-center">
-        <p className="text-gray-500 text-sm">Something went wrong loading the assessment.</p>
-        <button onClick={() => router.push("/")} className="text-blue-500 text-sm font-medium">
+      <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 text-center bg-background max-w-sm mx-auto w-full">
+        <p className="text-ds-text-2 text-sm">Something went wrong loading the assessment.</p>
+        <button onClick={() => router.push("/")} className="text-ds-accent text-sm font-medium">
           Go back
         </button>
       </main>
@@ -134,8 +134,8 @@ export default function AssessmentFlow({ injuryType }: Props) {
     // Non-seek-care terminal: navigated via useEffect above — show loading
     return (
       <main className="flex min-h-svh flex-col items-center justify-center gap-4">
-        <div className="w-8 h-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
-        <p className="text-sm text-gray-400">Building your recovery plan…</p>
+        <div className="w-8 h-8 rounded-full border-2 border-ds-accent border-t-transparent animate-spin" />
+        <p className="text-sm text-ds-text-3">Building your recovery plan…</p>
       </main>
     );
   }
@@ -147,18 +147,18 @@ export default function AssessmentFlow({ injuryType }: Props) {
   const questionNumber = traversal.history.length + 1;
 
   return (
-    <main className="flex flex-col min-h-svh bg-white max-w-sm mx-auto w-full">
+    <main className="flex flex-col min-h-svh bg-background max-w-sm mx-auto w-full">
 
       {/* Nav bar */}
       <div className="flex items-center gap-3 px-4 pt-10 pb-3">
         <button
           onClick={handleBack}
           aria-label="Go back"
-          className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 text-lg transition-colors"
+          className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-secondary text-ds-text-3 text-lg transition-colors"
         >
           ←
         </button>
-        <span className="flex-1 text-center text-sm font-semibold text-gray-700 truncate">
+        <span className="flex-1 text-center text-sm font-semibold text-ds-text-2 truncate">
           {displayName}
         </span>
         {/* Spacer to balance the back button */}

@@ -222,3 +222,143 @@ Issues that persisted through 3 rounds of adversarial review — resolve before 
 - You pushed back on "acute injuries only" — you said "I feel like my product would work for all of them even if built for one." That instinct is right, and it's worth holding onto: the full arc (acute → recovery → return to sport) is the complete product. The MVP framing is just sequencing.
 - You picked Approach B without hesitation when given the option. You didn't take the shortcut.
 - You're embedded in the world you're building for. That's not nothing — it's the thing most founders spend months trying to manufacture.
+
+---
+
+# Visual Design System
+
+*Added 2026-03-25 by /design-consultation*
+
+## Aesthetic Direction
+
+- **Direction:** Performance-Grounded
+- **Decoration level:** Minimal — typography and whitespace do the work
+- **Mood:** Warm authority. The app feels like a trusted expert you can access at 11pm after rolling your ankle. Confident, calm, capable. Not clinical-cold (Kaia Health), not green-wellness-corporate (Hinge Health).
+- **Core principle:** Users are athletes in a temporary setback — not patients with chronic pain. The design should feel like a performance optimization system, not a symptom tracker. Type-forward — the assessment questions and recovery data ARE the interface.
+- **Competitive gap:** Hinge Health owns warm-green. Kaia Health owns electric navy. No product in the space uses warm earth tones. The burnt sienna accent is completely unoccupied territory.
+
+## Typography
+
+- **Display/Questions:** Cabinet Grotesk 800 — confident, slightly editorial, strong at mobile sizes. This is PhysicAI's typographic voice.
+- **Body/Options:** DM Sans 400/500/600 — humanist, highly readable at 14–16px on mobile.
+- **UI Labels/Metadata:** DM Sans 700, uppercase, letter-spacing 0.12–0.14em
+- **Data/Numbers:** Geist 500/600, `font-variant-numeric: tabular-nums`
+- **Code:** Geist Mono
+
+### Font Loading
+```html
+<!-- Cabinet Grotesk via Fontshare -->
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap">
+<!-- DM Sans via Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+```
+
+### Type Scale
+| Role | Font | Size | Weight | Line-height |
+|------|------|------|--------|-------------|
+| H1 (screen title) | Cabinet Grotesk | 26–28px | 800 | 1.15 |
+| H2 (question) | Cabinet Grotesk | 22px | 700 | 1.2 |
+| Body large | DM Sans | 16–17px | 400 | 1.65 |
+| Answer options | DM Sans | 14px | 500 | 1.4 |
+| Labels | DM Sans | 10–11px | 700 uppercase | 1 |
+| Caption | DM Sans | 12px | 400 | 1.5 |
+| Data | Geist | varies | 600 | 1 |
+
+## Color
+
+### Light Mode (primary)
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--bg` | `#FAF9F7` | Page background (warm off-white) |
+| `--surface` | `#F2EFE9` | Cards, list items, inputs |
+| `--surface-2` | `#EAE5DC` | Hover states, secondary surfaces |
+| `--border` | `#E0D9CE` | All borders |
+| `--text` | `#1C1714` | Primary text |
+| `--text-2` | `#6B5F53` | Secondary text, descriptions |
+| `--text-3` | `#A89E92` | Muted, placeholders, labels |
+| `--accent` | `#C2440A` | CTAs, selected states, brand moments |
+| `--accent-dk` | `#9A3608` | Hover on accent elements |
+| `--accent-lt` | `#FDF0E9` | Selected card backgrounds |
+| `--success` | `#1E6E3D` | Recovery milestones |
+| `--success-lt` | `#E8F5EE` | Success backgrounds |
+| `--warning` | `#9C6C00` | Caution states |
+| `--warning-lt` | `#FEF7E0` | Warning backgrounds |
+| `--error` | `#A82020` | Seek care, critical |
+| `--error-lt` | `#FDEAEA` | Error backgrounds |
+
+### Dark Mode
+| Token | Hex |
+|-------|-----|
+| `--bg` | `#141210` |
+| `--surface` | `#1E1B18` |
+| `--surface-2` | `#2A2520` |
+| `--border` | `#38322B` |
+| `--text` | `#F5F2EC` |
+| `--text-2` | `#A89E92` |
+| `--accent` | `#E05515` |
+| `--accent-lt` | `#2A1A0E` |
+
+## Spacing
+
+- **Base unit:** 4px
+- **Screen padding:** 20–24px horizontal
+- **Card padding:** 16px (answer cards) / 20px (content cards)
+- **Card gap:** 8–10px between list items
+- **Section gap:** 28–32px between sections
+
+## Layout
+
+- **Max content width:** `max-w-sm` (384px) centered — all screens
+- **Border radius hierarchy:**
+  - Buttons: 10px
+  - Cards/inputs: 12px
+  - Large content cards: 14–16px
+  - Pills/badges: 999px
+- **Rule:** Never uniform — size correlates with element scale
+
+## Motion
+
+- **Easing:** `ease-out` entering · `ease-in` exiting · `ease-in-out` moving
+- **Duration:** micro 80–120ms · short 150–200ms · medium 250–350ms
+- **Assessment question transition:** slide-in-from-right, 200ms ease-out (keep existing)
+- **`prefers-reduced-motion`:** All transitions disabled
+
+## Component Patterns
+
+### Answer Cards (core interaction)
+```
+background: var(--surface)
+border: 1.5px solid var(--border)
+border-radius: 12px
+padding: 16px 18px
+font: DM Sans 500 14px
+hover → border: --accent, bg: --accent-lt
+pressed/selected → bg: --accent, text: white
+```
+
+### CTA Button
+```
+background: var(--accent)
+height: 54–58px full-width sticky footer
+border-radius: 12px
+font: DM Sans 700 15px
+disabled → bg: --surface-2, color: --text-3
+```
+
+### Progress Bar
+```
+height: 3px
+track: var(--surface-2)
+fill: var(--accent)
+border-radius: 999px
+```
+
+## Decisions Log
+
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| 2026-03-25 | Initial visual design system | /design-consultation — competitive research of Hinge Health, Kaia Health, Recover Athletics |
+| 2026-03-25 | Burnt sienna accent #C2440A | Warm orange is unoccupied in digital PT space. Creates distinct visual identity. |
+| 2026-03-25 | Cabinet Grotesk for headings | Assessment questions are the core product moment — they deserve type with personality. |
+| 2026-03-25 | Warm off-white ground #FAF9F7 | Pure white feels clinical. Warm ground signals care without sacrificing legibility. |
+| 2026-03-25 | Type-forward, no photography dependency | PhysicAI's value is AI intelligence — design is honest to the product's actual differentiator. |

@@ -7,9 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: 'Cabinet Grotesk', var(--font-dm-sans), sans-serif;
+  --font-data: var(--font-geist-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,41 +47,69 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Design system tokens */
+  --color-ds-accent: var(--ds-accent);
+  --color-ds-accent-dk: var(--ds-accent-dk);
+  --color-ds-accent-lt: var(--ds-accent-lt);
+  --color-ds-surface-2: var(--ds-surface-2);
+  --color-ds-text-2: var(--ds-text-2);
+  --color-ds-text-3: var(--ds-text-3);
+  --color-ds-success: var(--ds-success);
+  --color-ds-success-lt: var(--ds-success-lt);
+  --color-ds-warning: var(--ds-warning);
+  --color-ds-warning-lt: var(--ds-warning-lt);
+  --color-ds-error: var(--ds-error);
+  --color-ds-error-lt: var(--ds-error-lt);
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  /* Design system — warm off-white, burnt sienna accent */
+  --background: oklch(0.979 0.006 73);
+  --foreground: oklch(0.148 0.015 52);
+  --card: oklch(0.953 0.012 73);
+  --card-foreground: oklch(0.148 0.015 52);
+  --popover: oklch(0.953 0.012 73);
+  --popover-foreground: oklch(0.148 0.015 52);
+  --primary: oklch(0.499 0.178 35);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --secondary: oklch(0.912 0.015 73);
+  --secondary-foreground: oklch(0.148 0.015 52);
+  --muted: oklch(0.912 0.015 73);
+  --muted-foreground: oklch(0.665 0.020 60);
+  --accent: oklch(0.953 0.012 73);
+  --accent-foreground: oklch(0.148 0.015 52);
+  --destructive: oklch(0.44 0.18 25);
+  --border: oklch(0.880 0.015 73);
+  --input: oklch(0.880 0.015 73);
+  --ring: oklch(0.499 0.178 35);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.953 0.012 73);
+  --sidebar-foreground: oklch(0.148 0.015 52);
+  --sidebar-primary: oklch(0.499 0.178 35);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-accent: oklch(0.912 0.015 73);
+  --sidebar-accent-foreground: oklch(0.148 0.015 52);
+  --sidebar-border: oklch(0.880 0.015 73);
+  --sidebar-ring: oklch(0.499 0.178 35);
+
+  /* Raw design tokens */
+  --ds-accent: #C2440A;
+  --ds-accent-dk: #9A3608;
+  --ds-accent-lt: #FDF0E9;
+  --ds-surface-2: #EAE5DC;
+  --ds-text-2: #6B5F53;
+  --ds-text-3: #A89E92;
+  --ds-success: #1E6E3D;
+  --ds-success-lt: #E8F5EE;
+  --ds-warning: #9C6C00;
+  --ds-warning-lt: #FEF7E0;
+  --ds-error: #A82020;
+  --ds-error-lt: #FDEAEA;
 }
 
 .dark {
@@ -115,6 +144,19 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --ds-accent: #E05515;
+  --ds-accent-dk: #F07040;
+  --ds-accent-lt: #2A1A0E;
+  --ds-surface-2: #2A2520;
+  --ds-text-2: #A89E92;
+  --ds-text-3: #6B5F53;
+  --ds-success: #2EAA60;
+  --ds-success-lt: #0D2A1C;
+  --ds-warning: #D4960A;
+  --ds-warning-lt: #2A1F04;
+  --ds-error: #D44444;
+  --ds-error-lt: #2A0D0D;
 }
 
 @layer base {
