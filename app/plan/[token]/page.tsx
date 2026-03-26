@@ -26,23 +26,27 @@ function exerciseLabel(id: string): string {
 // ─── Components ───────────────────────────────────────────────────────────────
 
 function PendingReviewScreen() {
+  const router = useRouter();
   return (
-    <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-6 bg-white">
-      <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center">
-        <svg viewBox="0 0 24 24" className="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
-        </svg>
-      </div>
-      <div className="text-center max-w-xs">
-        <h1 className="text-xl font-bold text-gray-900 mb-2">Plan under review</h1>
-        <p className="text-sm text-gray-500 leading-relaxed">
-          A physical therapist is reviewing your recovery plan. You'll receive an email when it's ready — usually within a few hours.
-        </p>
-      </div>
-      <div className="bg-blue-50 rounded-2xl px-6 py-4 max-w-xs w-full">
-        <p className="text-xs text-blue-700 leading-relaxed font-medium">
-          While you wait: rest, ice 20 min on/off, and elevate if possible.
-        </p>
+    <main className="flex flex-col min-h-svh px-8 bg-white">
+      <div className="flex flex-col gap-6 max-w-xs mx-auto w-full pt-24 pb-10">
+        <div>
+          <h1 className="text-xl font-bold text-gray-900 mb-2">Plan under review</h1>
+          <p className="text-sm text-gray-500 leading-relaxed">
+            A physical therapist is reviewing your recovery plan. You'll receive an email when it's ready — usually within a few hours.
+          </p>
+        </div>
+        <div className="bg-blue-50 rounded-xl px-5 py-4">
+          <p className="text-xs text-blue-700 leading-relaxed font-medium">
+            While you wait: rest, ice 20 min on/off, and elevate if possible.
+          </p>
+        </div>
+        <button
+          onClick={() => router.replace("/")}
+          className="text-sm text-gray-400 hover:text-gray-600 underline underline-offset-2 transition-colors text-left"
+        >
+          ← Start a new assessment
+        </button>
       </div>
     </main>
   );
