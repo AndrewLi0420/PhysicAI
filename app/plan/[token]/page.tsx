@@ -28,7 +28,7 @@ function exerciseLabel(id: string): string {
 function PendingReviewScreen() {
   const router = useRouter();
   return (
-    <main className="flex flex-col min-h-svh px-8 bg-white">
+    <main className="flex flex-col min-h-svh px-8 bg-white max-w-sm mx-auto w-full">
       <div className="flex flex-col gap-6 max-w-xs mx-auto w-full pt-24 pb-10">
         <div>
           <h1 className="text-xl font-bold text-gray-900 mb-2">Plan under review</h1>

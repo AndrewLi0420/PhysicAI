@@ -147,7 +147,7 @@ export default function AssessmentFlow({ injuryType }: Props) {
   const questionNumber = traversal.history.length + 1;
 
   return (
-    <main className="flex flex-col min-h-svh bg-white">
+    <main className="flex flex-col min-h-svh bg-white max-w-sm mx-auto w-full">
 
       {/* Nav bar */}
       <div className="flex items-center gap-3 px-4 pt-10 pb-3">

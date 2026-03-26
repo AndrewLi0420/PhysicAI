@@ -91,7 +91,7 @@ function GeneratingContent() {
   }
 
   return (
-    <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-8 bg-white">
+    <main className="flex flex-col min-h-svh items-center justify-center px-8 gap-8 bg-white max-w-sm mx-auto w-full">
       {/* Spinner */}
       <div className="relative w-16 h-16">
         <div className="absolute inset-0 rounded-full border-4 border-blue-100" />
