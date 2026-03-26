@@ -223,6 +223,19 @@ Deno.serve(async (req) => {
 
   await patchPlan(planId, { plan_json: planInput, status }, supabaseUrl, serviceKey);
 
+  // ── 6. Email founder for pending_review plans ──────────────────────────────
+
+  if (status === "pending_review") {
+    const secret = Deno.env.get("APPROVE_PLAN_SECRET");
+    const resendKey = Deno.env.get("RESEND_API_KEY");
+    const appUrl = Deno.env.get("APP_URL") ?? "https://physicai.app";
+    if (secret && resendKey) {
+      notifyFounder({ planId, planInput, appUrl, secret, resendKey }).catch((e) =>
+        console.error("Founder notify failed:", e)
+      );
+    }
+  }
+
   return new Response(
     JSON.stringify({
       token,
@@ -245,6 +258,90 @@ ${JSON.stringify(flags, null, 2)}
 Use the generate_recovery_plan tool to return a structured plan. Select exercise_ids ONLY from the provided enum — do not invent exercise IDs. Include 2-4 exercises for today appropriate to Phase 1 (pain control). Write phase descriptions in plain, encouraging language for a college or high school athlete.
 
 Always include relevant red flag criteria the athlete should watch for.`;
+}
+
+// ─── Founder review email ─────────────────────────────────────────────────────
+
+const encoder = new TextEncoder();
+
+async function hmacSign(secret: string, message: string): Promise<string> {
+  const key = await crypto.subtle.importKey(
+    "raw", encoder.encode(secret),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, encoder.encode(message));
+  return Array.from(new Uint8Array(sig)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function notifyFounder(ctx: {
+  planId: string;
+  planInput: Record<string, unknown>;
+  appUrl: string;
+  secret: string;
+  resendKey: string;
+}) {
+  const { planId, planInput, appUrl, secret, resendKey } = ctx;
+  const approveSig = await hmacSign(secret, `${planId}:approve`);
+  const flagSig    = await hmacSign(secret, `${planId}:flag`);
+
+  const approveUrl = `${appUrl}/functions/v1/approve-plan?plan_id=${planId}&action=approve&sig=${approveSig}`;
+  const flagUrl    = `${appUrl}/functions/v1/approve-plan?plan_id=${planId}&action=flag&sig=${flagSig}`;
+
+  const injurySubtype = (planInput.injury_subtype as string) ?? "Unknown injury";
+  const severity      = (planInput.severity as string) ?? "";
+
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${resendKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "PhysicAI <onboarding@resend.dev>",
+      to: "andrewli0420@gmail.com",
+      subject: `[PhysicAI] New plan to review — ${injurySubtype} ${severity}`,
+      html: buildReviewEmailHtml({ planId, injurySubtype, severity, planInput, approveUrl, flagUrl }),
+    }),
+  });
+}
+
+function buildReviewEmailHtml(p: {
+  planId: string;
+  injurySubtype: string;
+  severity: string;
+  planInput: Record<string, unknown>;
+  approveUrl: string;
+  flagUrl: string;
+}): string {
+  const exercises = (p.planInput.todays_exercises as Array<{ exercise_id: string }> ?? [])
+    .map((e) => `<li>${e.exercise_id}</li>`).join("");
+  const redFlags = (p.planInput.red_flags as string[] ?? [])
+    .map((f) => `<li>${f}</li>`).join("");
+
+  return `
+<!DOCTYPE html>
+<html>
+<body style="font-family:-apple-system,sans-serif;background:#f9fafb;padding:24px;margin:0;">
+  <div style="max-width:520px;margin:0 auto;background:white;border-radius:16px;padding:32px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+    <p style="font-size:11px;font-weight:600;letter-spacing:0.08em;color:#3B82F6;text-transform:uppercase;margin:0 0 16px;">PhysicAI · PT Review</p>
+    <h1 style="font-size:20px;font-weight:700;color:#111827;margin:0 0 4px;">${p.injurySubtype}</h1>
+    <p style="font-size:14px;color:#6B7280;margin:0 0 24px;">${p.severity} · Plan ID: ${p.planId.slice(0, 8)}</p>
+
+    <p style="font-size:13px;font-weight:600;color:#374151;margin:0 0 4px;">Today's exercises</p>
+    <ul style="font-size:13px;color:#6B7280;margin:0 0 16px;padding-left:20px;">${exercises}</ul>
+
+    <p style="font-size:13px;font-weight:600;color:#374151;margin:0 0 4px;">Red flags</p>
+    <ul style="font-size:13px;color:#6B7280;margin:0 0 24px;padding-left:20px;">${redFlags}</ul>
+
+    <div style="display:flex;gap:12px;">
+      <a href="${p.approveUrl}" style="flex:1;display:block;background:#10B981;color:white;text-align:center;text-decoration:none;font-weight:600;font-size:14px;padding:12px 20px;border-radius:10px;">✓ Approve</a>
+      <a href="${p.flagUrl}" style="flex:1;display:block;background:#EF4444;color:white;text-align:center;text-decoration:none;font-weight:600;font-size:14px;padding:12px 20px;border-radius:10px;">✗ Flag</a>
+    </div>
+
+    <p style="font-size:11px;color:#9CA3AF;margin:20px 0 0;text-align:center;">One-click links are signed and expire-resistant. Each link works once per action.</p>
+  </div>
+</body>
+</html>`.trim();
 }
 
 async function patchPlan(

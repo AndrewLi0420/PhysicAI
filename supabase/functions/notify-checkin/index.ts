@@ -103,7 +103,7 @@ async function sendReminder(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "PhysicAI <recovery@physicai.app>",
+      from: "PhysicAI <onboarding@resend.dev>",
       to: email,
       subject: `Day ${day} check-in — how's your ${injuryName}?`,
       html: buildEmailHtml({ injuryName, day, planUrl }),
